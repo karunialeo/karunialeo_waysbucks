@@ -42,7 +42,7 @@ export default function ProductDesc() {
             <span>Total</span>
             <span>Rp {numberWithCommas(price)}</span>
           </div>
-          <button className="w-full bg-red-700 text-white py-2 rounded-md hover:bg-brand-red">
+          <button className="w-full bg-red-600 text-white py-2 rounded-md hover:bg-brand-red">
             Add Cart
           </button>
         </div>

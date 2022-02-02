@@ -24,8 +24,12 @@ function Navbar() {
               className="mx-8"
             />
           </a>
-          <a href="">
-            <img src="/img/user.png" alt="user" />
+          <a href="/customer" className="">
+            <img
+              src="/img/user.png"
+              alt="user"
+              className="h-14 w-14 rounded-full border-2 border-brand-red"
+            />
           </a>
         </div>
       </nav>

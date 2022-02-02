@@ -5,8 +5,12 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
 function Navbar() {
+  const [isLogin, setIsLogin] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
   const [openRegister, setOpenRegister] = useState(false);
+  function loggedIn() {
+    setOpenLogin(true);
+  }
 
   const cancelButtonRef = useRef(null);
 
@@ -16,21 +20,38 @@ function Navbar() {
         <a href="/loggedin">
           <img src="/logo.png" alt="" />
         </a>
-        <div className="flex">
-          <button
-            type="button"
-            className="rounded px-3 lg:px-5 py-1 text-brand-red outline text-[Product-Sans] outline-brand-red mr-4 box-border"
-            onClick={() => setOpenLogin(true)}
-          >
-            Login
-          </button>
-          <button
-            type="button"
-            className="rounded px-3 lg:px-5 py-1 text-white outline outline-brand-red bg-brand-red"
-            onClick={() => setOpenRegister(true)}
-          >
-            Register
-          </button>
+        <div className="space-x-5">
+          {isLogin ? (
+            <div className="flex items-center">
+              <a href="">
+                <img
+                  src="/img/shopping-basket.png"
+                  alt="shopping-basket"
+                  className="mx-8"
+                />
+              </a>
+              <a href="">
+                <img src="/img/user.png" alt="user" />
+              </a>
+            </div>
+          ) : (
+            <>
+              <button
+                type="button"
+                className="rounded px-3 lg:px-5 py-1 text-brand-red border-2 text-[Product-Sans] border-brand-red box-border"
+                onClick={() => setOpenLogin(true)}
+              >
+                Login
+              </button>
+              <button
+                type="button"
+                className="rounded px-3 lg:px-5 py-1 text-white border-2 border-brand-red bg-brand-red"
+                onClick={() => setOpenRegister(true)}
+              >
+                Register
+              </button>
+            </>
+          )}
         </div>
       </nav>
       <Transition.Root show={openLogin} as={Fragment}>

@@ -1,4 +1,15 @@
+import { useState } from "react/cjs/react.development";
+import Toppings from "./Toppings";
+
 export default function ProductDesc() {
+  const [price, setPrice] = useState(31000);
+
+  function numberWithCommas(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return parts.join(".");
+  }
+
   return (
     <>
       <div className="mx-8 lg:pt-10 pb-20 lg:mx-32 lg:flex">
@@ -18,44 +29,18 @@ export default function ProductDesc() {
           </div>
           <div className="mb-10 lg:mb-14">
             <h4 className="text-brand-red text-xl font-bold">Toping</h4>
-            <div className="flex flex-wrap items-center">
-              <div className="w-1/2 lg:w-1/4 mt-10 flex flex-col cursor-pointer hover:opacity-75 items-center">
-                <img src="/img/toppings/topping-1.png" alt="" />
-                <h4 className="text-center mt-3">Bubble Tea Gelatin</h4>
-              </div>
-              <div className="w-1/2 lg:w-1/4 mt-10 flex flex-col cursor-pointer hover:opacity-75 items-center">
-                <img src="/img/toppings/topping-2.png" alt="" />
-                <h4 className="text-center mt-3">Mango</h4>
-              </div>
-              <div className="w-1/2 lg:w-1/4 mt-10 flex flex-col cursor-pointer hover:opacity-75 items-center">
-                <img src="/img/toppings/topping-3.png" alt="" />
-                <h4 className="text-center mt-3">Green Coconut</h4>
-              </div>
-              <div className="w-1/2 lg:w-1/4 mt-10 flex flex-col cursor-pointer hover:opacity-75 items-center">
-                <img src="/img/toppings/topping-4.png" alt="" />
-                <h4 className="text-center mt-3">Boba Mango</h4>
-              </div>
-              <div className="w-1/2 lg:w-1/4 mt-10 flex flex-col cursor-pointer hover:opacity-75 items-center">
-                <img src="/img/toppings/topping-5.png" alt="" />
-                <h4 className="text-center mt-3">Blueberry Boba</h4>
-              </div>
-              <div className="w-1/2 lg:w-1/4 mt-10 flex flex-col cursor-pointer hover:opacity-75 items-center">
-                <img src="/img/toppings/topping-3.png" alt="" />
-                <h4 className="text-center mt-3">Kiwi Popping Pearl</h4>
-              </div>
-              <div className="w-1/2 lg:w-1/4 mt-10 flex flex-col cursor-pointer hover:opacity-75 items-center">
-                <img src="/img/toppings/topping-7.png" alt="" />
-                <h4 className="text-center mt-3">Matcha Cantaloupe</h4>
-              </div>
-              <div className="w-1/2 lg:w-1/4 mt-10 flex flex-col cursor-pointer hover:opacity-75 items-center">
-                <img src="/img/toppings/topping-8.png" alt="" />
-                <h4 className="text-center mt-3">Strawberry Popping</h4>
-              </div>
+            <div className="flex flex-wrap items-center text-center text-brand-red">
+              {Toppings.map((item) => (
+                <Topping
+                  toppingName={item.toppingName}
+                  index={item.toppingIndex}
+                />
+              ))}
             </div>
           </div>
           <div className="mb-10 lg:mb-10 flex justify-between text-xl font-bold text-brand-red">
             <span>Total</span>
-            <span>Rp 31.000</span>
+            <span>Rp {numberWithCommas(price)}</span>
           </div>
           <button className="w-full bg-red-700 text-white py-2 rounded-md hover:bg-brand-red">
             Add Cart
@@ -63,5 +48,23 @@ export default function ProductDesc() {
         </div>
       </div>
     </>
+  );
+}
+
+function Topping(props) {
+  return (
+    <button
+      onClick={() => console.log("test")}
+      className="w-1/2 lg:w-1/4 mt-10 flex flex-col items-center"
+    >
+      <img
+        src={`/img/toppings/topping-${props.index}.png`}
+        alt=""
+        className="hover:opacity-75"
+      />
+      <h4 className="mt-3 text-sm" key={props.index}>
+        {props.toppingName}
+      </h4>
+    </button>
   );
 }

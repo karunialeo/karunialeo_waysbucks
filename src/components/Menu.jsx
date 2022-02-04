@@ -1,5 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
+import Products from "../tempDatabase/Products";
+import thousandSeparator from "../utils/thousandSeparator";
 
 function Menu() {
   return (
@@ -8,26 +11,15 @@ function Menu() {
         Let&#39;s Order
       </h1>
       <div className="product-list flex flex-wrap justify-center lg:justify-between mb-20">
-        <a href="/product">
-          <ProductCard
-            name="Ice Coffee Palm Sugar"
-            image="product-1"
-            price="27.000"
-          />
-        </a>
-        <a href="/product">
-          <ProductCard
-            name="Ice Coffee Green Tea"
-            image="product-2"
-            price="31.000"
-          />
-        </a>
-        <a href="/product">
-          <ProductCard name="Hanami Latte" image="product-3" price="29.000" />
-        </a>
-        <a href="/product">
-          <ProductCard name="Clepon Coffee" image="product-4" price="28.000" />
-        </a>
+        {Products.map((item) => (
+          <Link to={`/product/${item.productIndex}`}>
+            <ProductCard
+              name={item.productName}
+              image={`product-${item.productIndex}`}
+              price={thousandSeparator(item.price)}
+            />
+          </Link>
+        ))}
       </div>
     </div>
   );

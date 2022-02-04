@@ -1,60 +1,35 @@
-import { Fragment, useRef, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import AuthForm from "./AuthForm";
-import LoginForm from "./LoginForm";
-import RegisterForm from "./RegisterForm";
+import { Link } from "react-router-dom";
+import Transactions from "../tempDatabase/Transactions";
 
-function Navbar() {
-  const [openLogin, setOpenLogin] = useState(false);
-  const [openRegister, setOpenRegister] = useState(false);
-
-  const cancelButtonRef = useRef(null);
-
+function NavLoggedIn() {
   return (
     <>
       <nav className="mx-4 lg:mx-20 mt-4 flex justify-between items-center">
-        <a href="/">
+        <Link to="/">
           <img src="/logo.png" alt="" />
-        </a>
+        </Link>
         <div className="flex items-center">
-          <a href="">
+          <Link to="/my-cart" className="relative">
             <img
               src="/img/shopping-basket.png"
               alt="shopping-basket"
               className="mx-8"
             />
-          </a>
-          <a href="/customer" className="">
+            <div className="w-5 h-5 text-xs text-white font-bold bg-red-600 rounded-full absolute right-6 -top-1 flex justify-center items-center">
+              {Transactions.length}
+            </div>
+          </Link>
+          <Link to="/customer" className="">
             <img
               src="/img/user.png"
               alt="user"
-              className="h-14 w-14 rounded-full border-2 border-brand-red"
+              className="h-14 w-14 object-cover rounded-full border-2 border-brand-red"
             />
-          </a>
+          </Link>
         </div>
       </nav>
-      <Transition.Root show={openLogin} as={Fragment}>
-        <Dialog
-          as="div"
-          className="fixed z-10 inset-0 overflow-y-auto"
-          initialFocus={cancelButtonRef}
-          onClose={setOpenLogin}
-        >
-          <AuthForm authen="Login" authComp={<LoginForm />} />
-        </Dialog>
-      </Transition.Root>
-      <Transition.Root show={openRegister} as={Fragment}>
-        <Dialog
-          as="div"
-          className="fixed z-10 inset-0 overflow-y-auto"
-          initialFocus={cancelButtonRef}
-          onClose={setOpenRegister}
-        >
-          <AuthForm authen="Register" authComp={<RegisterForm />} />
-        </Dialog>
-      </Transition.Root>
     </>
   );
 }
 
-export default Navbar;
+export default NavLoggedIn;

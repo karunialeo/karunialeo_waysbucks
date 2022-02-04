@@ -1,73 +1,96 @@
+import React, { useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import NavLoggedIn from "./components/NavLoggedIn";
 import Jumbotron from "./components/Jumbotron";
 import Menu from "./components/Menu";
 import ProductDesc from "./components/ProductDesc";
 import CustomerComponent from "./components/CustomerComponent";
+import MyCart from "./components/MyCart";
 import AddProduct from "./components/admin/AddProduct";
+import PrivateRoute from "./components/auth/PrivateRoute";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
+  const [isLogin, setIsLogin] = useState(false);
+
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/loggedin" element={<LoggedIn />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/customer" element={<Customer />} />
-          <Route path="/add-product" element={<AddNewProduct />} />
+          <Route
+            path="/"
+            element={
+              <>
+                <Navbar
+                  isLogin={isLogin}
+                  openLogin={false}
+                  onClick={() => setIsLogin(!isLogin)}
+                />
+                <Jumbotron></Jumbotron>
+                <Menu></Menu>
+              </>
+            }
+          />
+          <Route
+            exact
+            path="/signin"
+            element={
+              <>
+                <Navbar
+                  isLogin={isLogin}
+                  openLogin={true}
+                  onClick={() => setIsLogin(!isLogin)}
+                />
+                <Jumbotron></Jumbotron>
+                <Menu></Menu>
+              </>
+            }
+          />
+          <Route exact path="/" element={<PrivateRoute isLogin={isLogin} />}>
+            <Route
+              exact
+              path="/product/:id"
+              element={
+                <>
+                  <Navbar isLogin={isLogin} openLogin={false} />
+                  <ProductDesc />
+                </>
+              }
+            />
+            <Route
+              exact
+              path="/customer"
+              element={
+                <>
+                  <Navbar isLogin={isLogin} openLogin={false} />
+                  <CustomerComponent />
+                </>
+              }
+            />
+            <Route
+              exact
+              path="/add-product"
+              element={
+                <>
+                  <Navbar isLogin={isLogin} openLogin={false} />
+                  <AddProduct />
+                </>
+              }
+            />
+            <Route
+              exact
+              path="/my-cart"
+              element={
+                <>
+                  <Navbar isLogin={isLogin} openLogin={false} />
+                  <MyCart />
+                </>
+              }
+            />
+          </Route>
         </Routes>
       </Router>
-    </>
-  );
-}
-
-function Home() {
-  return (
-    <>
-      <Navbar></Navbar>
-      <Jumbotron></Jumbotron>
-      <Menu></Menu>
-    </>
-  );
-}
-
-function LoggedIn() {
-  return (
-    <>
-      <NavLoggedIn></NavLoggedIn>
-      <Jumbotron></Jumbotron>
-      <Menu></Menu>
-    </>
-  );
-}
-
-function Product() {
-  return (
-    <>
-      <NavLoggedIn></NavLoggedIn>
-      <ProductDesc></ProductDesc>
-    </>
-  );
-}
-
-function Customer() {
-  return (
-    <>
-      <NavLoggedIn></NavLoggedIn>
-      <CustomerComponent></CustomerComponent>
-    </>
-  );
-}
-
-function AddNewProduct() {
-  return (
-    <>
-      <NavLoggedIn></NavLoggedIn>
-      <AddProduct></AddProduct>
     </>
   );
 }

@@ -1,10 +1,10 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import AuthForm from "./AuthForm";
+import AuthForm from "./auth/AuthForm";
+import LoginForm from "./auth/LoginForm";
 
 export default function Modal() {
-  const [open, setOpen] = useState(props.modalState);
+  const [open, setOpen] = useState(true);
 
   const cancelButtonRef = useRef(null);
 
@@ -12,7 +12,7 @@ export default function Modal() {
     <Transition.Root show={open} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed z-10 inset-0 overflow-y-auto"
+        className="fixed z-10 inset-0 overflow-y-hidden"
         initialFocus={cancelButtonRef}
         onClose={setOpen}
       >
@@ -50,7 +50,7 @@ export default function Modal() {
                 <div className="flex justify-center sm:items-start">
                   <div className="mt-3 md:w-96 text-center sm:mt-0 sm:text-left">
                     <div className="mt-2">
-                      <AuthForm authen="Login" />
+                      <AuthForm authen="Login" authComp={<LoginForm />} />
                     </div>
                   </div>
                 </div>

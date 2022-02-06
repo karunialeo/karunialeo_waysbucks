@@ -33,6 +33,7 @@ function App() {
                   isLogin={isLogin}
                   isAdmin={isAdmin}
                   openLogin={false}
+                  openRegister={false}
                   onClick={() => setIsLogin(!isLogin)}
                 />
                 <Jumbotron />
@@ -49,6 +50,7 @@ function App() {
                   isLogin={isLogin}
                   isAdmin={isAdmin}
                   openLogin={true}
+                  openRegister={false}
                   onClick={() => setIsLogin(!isLogin)}
                 />
                 <Jumbotron />
@@ -56,22 +58,23 @@ function App() {
               </>
             }
           />
+          <Route
+            exact
+            path="/product/:id"
+            element={
+              <>
+                <Navbar
+                  isLogin={isLogin}
+                  isAdmin={isAdmin}
+                  openLogin={false}
+                  openRegister={false}
+                  onClick={() => setIsLogin(!isLogin)}
+                />
+                <ProductDesc />
+              </>
+            }
+          />
           <Route exact path="/" element={<CustomerRoute isLogin={isLogin} />}>
-            <Route
-              exact
-              path="/product/:id"
-              element={
-                <>
-                  <Navbar
-                    isLogin={isLogin}
-                    isAdmin={isAdmin}
-                    openLogin={false}
-                    onClick={() => setIsLogin(!isLogin)}
-                  />
-                  <ProductDesc />
-                </>
-              }
-            />
             <Route
               exact
               path="/customer"
@@ -81,6 +84,7 @@ function App() {
                     isLogin={isLogin}
                     isAdmin={isAdmin}
                     openLogin={false}
+                    openRegister={false}
                     onClick={() => setIsLogin(!isLogin)}
                   />
                   <CustomerComponent />
@@ -97,6 +101,7 @@ function App() {
                     isLogin={isLogin}
                     isAdmin={isAdmin}
                     openLogin={false}
+                    openRegister={false}
                     onClick={() => setIsLogin(!isLogin)}
                   />
                   <MyCart />
@@ -112,6 +117,7 @@ function App() {
                     isLogin={isLogin}
                     isAdmin={isAdmin}
                     openLogin={false}
+                    openRegister={false}
                     onClick={() => setIsLogin(!isLogin)}
                   />
                   <AddProduct isAdmin={isAdmin} />
@@ -127,9 +133,26 @@ function App() {
                     isLogin={isLogin}
                     isAdmin={isAdmin}
                     openLogin={false}
+                    openRegister={false}
                     onClick={() => setIsLogin(!isLogin)}
                   />
                   <AddTopping isAdmin={isAdmin} />
+                </>
+              }
+            />
+            <Route
+              exact
+              path="/transactions"
+              element={
+                <>
+                  <Navbar
+                    isLogin={isLogin}
+                    isAdmin={isAdmin}
+                    openLogin={false}
+                    openRegister={false}
+                    onClick={() => setIsLogin(!isLogin)}
+                  />
+                  <TransactionsTable isAdmin={isAdmin} />
                 </>
               }
             />
@@ -147,6 +170,7 @@ function App() {
                     isLogin={isLogin}
                     isAdmin={isAdmin}
                     openLogin={false}
+                    openRegister={false}
                     onClick={() => setIsLogin(!isLogin)}
                   />
                   <AddProduct isAdmin={isAdmin} />
@@ -162,6 +186,7 @@ function App() {
                     isLogin={isLogin}
                     isAdmin={isAdmin}
                     openLogin={false}
+                    openRegister={false}
                     onClick={() => setIsLogin(!isLogin)}
                   />
                   <AddTopping isAdmin={isAdmin} />
@@ -177,6 +202,7 @@ function App() {
                     isLogin={isLogin}
                     isAdmin={isAdmin}
                     openLogin={false}
+                    openRegister={false}
                     onClick={() => setIsLogin(!isLogin)}
                   />
                   <TransactionsTable isAdmin={isAdmin} />

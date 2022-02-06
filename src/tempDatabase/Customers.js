@@ -1,7 +1,7 @@
 const Customers = [
   {
     name: "Rizal Gans",
-    address: "Regional Paradigm Technician",
+    address: "Bintaro",
     status: "Waiting Approve",
     postcode: 14045,
     income: 69000,
@@ -9,7 +9,7 @@ const Customers = [
   },
   {
     name: "Asep Udin",
-    address: "Programmer",
+    address: "RC Veteran",
     status: "Success",
     postcode: 10200,
     income: 30000,
@@ -17,7 +17,7 @@ const Customers = [
   },
   {
     name: "Robby Shakti",
-    address: "Regional Paradigm Technician",
+    address: "Bekasi",
     status: "Cancel",
     postcode: 14045,
     income: 28000,
@@ -25,7 +25,7 @@ const Customers = [
   },
   {
     name: "Passyah Ungu",
-    address: "Programmer",
+    address: "Jl. Kesehatan",
     status: "On The Way",
     postcode: 10200,
     income: 30000,
@@ -33,7 +33,7 @@ const Customers = [
   },
   {
     name: "Subhan Sejati",
-    address: "Regional Paradigm Technician",
+    address: "Cimahi",
     status: "Waiting Approve",
     postcode: 14045,
     income: 72000,

@@ -20,7 +20,14 @@ export default function CustomerComponent() {
         </div>
       </div>
       <div className="w-full lg:w-1/2">
-        <TransactionCard />
+        <div>
+          <h3 className="text-3xl font-['Avenir-Black'] font-extrabold text-brand-red">
+            My Transaction
+          </h3>
+          <div className="lg:flex justify-between my-8 bg-brand-pink rounded-lg p-4">
+            <TransactionCard />
+          </div>
+        </div>
       </div>
     </div>
   );

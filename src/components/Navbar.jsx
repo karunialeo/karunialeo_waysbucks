@@ -6,7 +6,7 @@ import Transactions from "../tempDatabase/Transactions";
 
 function Navbar(props) {
   const [openLogin, setOpenLogin] = useState(props.openLogin);
-  const [openRegister, setOpenRegister] = useState(false);
+  const [openRegister, setOpenRegister] = useState(props.openRegister);
 
   const [openProfileMenu, setOpenProfileMenu] = useState(false);
 

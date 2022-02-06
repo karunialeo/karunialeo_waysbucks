@@ -44,5 +44,4 @@ export default function AddTopping(props) {
       </div>
     );
   }
-  return <h1>Test</h1>;
 }

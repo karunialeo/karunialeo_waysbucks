@@ -18,7 +18,7 @@ import AdminRoute from "./components/auth/AdminRoute";
 import CustomerRoute from "./components/auth/CustomerRoute";
 
 function App() {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
 
   return (

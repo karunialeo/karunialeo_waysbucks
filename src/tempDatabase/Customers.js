@@ -1,6 +1,6 @@
 const Customers = [
   {
-    name: "Jane Cooper",
+    name: "Rizal Gans",
     address: "Regional Paradigm Technician",
     status: "Waiting Approve",
     postcode: 14045,

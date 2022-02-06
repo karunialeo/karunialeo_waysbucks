@@ -13,8 +13,8 @@ function Jumbotron() {
         alt="jumbotron-img"
         className="absolute brightness-50 lg:brightness-100 lg:right-0 top-10"
       />
-      <div className="jumbotron-text text-white absolute top-16 left-2 lg:left-14 lg:w-1/2">
-        <h3 className="jumbotron-title font-['Freight'] text-4xl lg:text-6xl mb-1 lg:mb-4 uppercase">
+      <div className="text-white absolute top-16 left-2 lg:left-14 lg:w-1/2">
+        <h3 className="font-['Freight'] text-4xl lg:text-6xl mb-1 lg:mb-4 uppercase">
           Waysbucks
         </h3>
         <p className="font-['Montserrat'] text-lg lg:text-2xl mb-2 lg:mb-5">

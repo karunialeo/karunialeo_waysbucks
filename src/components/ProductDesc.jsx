@@ -1,11 +1,19 @@
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import Toppings from "../tempDatabase/Toppings";
 import thousandSeparator from "../utils/thousandSeparator";
 
 export default function ProductDesc({ item }) {
   const [price, setPrice] = useState(27000);
-  function addTopping() {
-    setPrice(price + 4000);
+  const [useTopping, setUseTopping] = useState(false);
+
+  function toggleAddTopping() {
+    if (!useTopping) {
+      setPrice(price + 4000);
+      setUseTopping(true);
+    } else {
+      setPrice(price - 4000);
+      setUseTopping(false);
+    }
   }
 
   return (
@@ -19,7 +27,7 @@ export default function ProductDesc({ item }) {
           />
         </div>
         <div className="text w-full lg:w-7/12">
-          <div className="mb-10 lg:mb-20">
+          <div className="mb-10 lg:mb-14">
             <h1 className="text-brand-red text-5xl font-extrabold font-['Avenir-Black'] mb-4">
               Ice Coffee Palm Sugar
             </h1>
@@ -31,11 +39,23 @@ export default function ProductDesc({ item }) {
             <h4 className="text-brand-red text-xl font-bold">Toping</h4>
             <div className="flex flex-wrap items-center text-center text-brand-red">
               {Toppings.map((item) => (
-                <Topping
-                  toppingName={item.toppingName}
-                  index={item.toppingIndex}
-                  onClick={addTopping}
-                />
+                <>
+                  <button
+                    onClick={toggleAddTopping}
+                    type="button"
+                    className="w-1/2 lg:w-1/4 mt-10 flex flex-col items-center relative"
+                  >
+                    <img
+                      src={`/img/toppings/topping-${item.toppingIndex}.png`}
+                      alt=""
+                      className="hover:opacity-75"
+                    />
+                    <h4 className="mt-3 text-sm" key={item.toppingIndex}>
+                      {item.toppingName}
+                    </h4>
+                    {useTopping ? <CheckTopping /> : null}
+                  </button>
+                </>
               ))}
             </div>
           </div>
@@ -52,38 +72,25 @@ export default function ProductDesc({ item }) {
   );
 }
 
-function Topping(props) {
+function CheckTopping() {
   return (
-    <button
-      onClick={props.onClick}
-      className="w-1/2 lg:w-1/4 mt-10 flex flex-col items-center relative"
-    >
-      <img
-        src={`/img/toppings/topping-${props.index}.png`}
-        alt=""
-        className="hover:opacity-75"
-      />
-      <h4 className="mt-3 text-sm" key={props.index}>
-        {props.toppingName}
-      </h4>
-      <div className="absolute right-10 bottom-8">
-        <div className="bg-green-600 text-white text-xs rounded-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-        </div>
+    <div className="absolute right-8 bottom-8">
+      <div className="bg-green-600 text-white text-xs rounded-full">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
       </div>
-    </button>
+    </div>
   );
 }

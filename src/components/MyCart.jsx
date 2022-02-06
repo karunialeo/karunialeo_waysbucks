@@ -5,14 +5,14 @@ import PaymentForm from "./PaymentForm";
 
 function MyCart() {
   return (
-    <div className="text-brand-red font-['Avenir-Book'] mx-28 mt-8 mb-20">
+    <div className="text-brand-red font-['Avenir-Book'] mx-4 lg:mx-28 mt-8 mb-20">
       <h4 className="font-['Avenir-Black'] font-bold text-3xl mb-8">My Cart</h4>
       <p className="mb-5">Review Your Order</p>
-      <div className="flex justify-between">
-        <div className="w-7/12">
+      <div className="lg:flex justify-between">
+        <div className="w-full lg:w-7/12 mb-20 lg:mb-0">
           <hr className="border-1 border-brand-red" />
           {Transactions.map((item) => (
-            <div className="flex justify-between">
+            <div key={item.id} className="flex justify-between">
               <div className="flex my-4 gap-x-4">
                 <img
                   src={`/img/products/${item.productImg}`}
@@ -46,8 +46,8 @@ function MyCart() {
             </div>
           ))}
           <hr className="border-1 border-brand-red mb-12" />
-          <div className="flex justify-between">
-            <div className="w-1/2">
+          <div className="flex justify-between space-x-4 lg:space-x-0">
+            <div className="w-7/12 lg:w-1/2">
               <hr className="border-1 border-brand-red mb-5" />
               <div className="space-y-3">
                 <div className="flex justify-between">
@@ -67,7 +67,7 @@ function MyCart() {
                   <span>{Transactions.length}</span>
                 </div>
               </div>
-              <hr className="border-1 border-brand-red my-5" />
+              <hr className="border-brand-red my-5" />
               <div className="flex justify-between font-bold">
                 <span>Total</span>
                 <span>
@@ -81,13 +81,13 @@ function MyCart() {
                 </span>
               </div>
             </div>
-            <div className="bg-pink-100 w-4/12 border-2 border-brand-red rounded-lg flex flex-col items-center justify-center gap-y-4">
+            <button className="bg-pink-100 w-5/12 lg:w-4/12 border-2 border-brand-red rounded-lg flex flex-col items-center justify-center gap-y-4">
               <img src="/img/invoices.png" alt="invoices" />
               <p className="text-gray-500">Attach of Transaction</p>
-            </div>
+            </button>
           </div>
         </div>
-        <div className="w-4/12">
+        <div className="w-full lg:w-4/12">
           <PaymentForm />
         </div>
       </div>

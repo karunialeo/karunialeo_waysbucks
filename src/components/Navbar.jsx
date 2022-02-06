@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, Menu, Transition } from "@headlessui/react";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import Transactions from "../tempDatabase/Transactions";
 
@@ -16,7 +16,7 @@ function Navbar(props) {
 
   const cancelButtonRef = useRef(null);
 
-  function loggedIn() {
+  function toggleLoggedIn() {
     setOpenLogin(false);
     setOpenRegister(false);
     props.onClick();
@@ -48,13 +48,15 @@ function Navbar(props) {
                   alt="shopping-basket"
                   className="mx-8"
                 />
-                <div className="w-5 h-5 text-xs text-white font-bold bg-red-600 rounded-full absolute right-6 -top-1 flex justify-center items-center">
-                  {Transactions.length}
-                </div>
+                {Transactions.length > 0 ? (
+                  <div className="w-5 h-5 text-xs text-white font-bold bg-red-600 rounded-full absolute right-6 -top-1 flex justify-center items-center">
+                    {Transactions.length}
+                  </div>
+                ) : null}
               </Link>
               <div onClick={() => showProfileMenu()} className="cursor-pointer">
                 <img
-                  src="/img/user.png"
+                  src={`/img/` + (props.isAdmin ? `admin` : `user`) + `.png`}
                   alt="user"
                   className="h-14 w-14 object-cover rounded-full border-2 border-brand-red"
                 />
@@ -62,36 +64,64 @@ function Navbar(props) {
               <div
                 className={
                   (openProfileMenu ? "absolute" : "hidden") +
-                  ` w-40 z-20 bg-white border border-gray-100 font-['Avenir-Book'] shadow-xl rounded-md right-0 top-16 transition-shadow`
+                  ` w-48 z-20 bg-white border border-gray-100 font-['Avenir-Book'] shadow-xl rounded-md right-0 top-16 transition-shadow`
                 }
               >
                 <ul>
-                  <Link
-                    to="/add-product"
-                    className="p-3 flex items-center hover:bg-gray-100"
-                  >
-                    <img
-                      src="/img/drink-icon.png"
-                      className="w-5 mr-2"
-                      alt="drink"
-                    />
-                    Add Product
-                  </Link>
-                  <Link
-                    to="/add-product"
-                    className="p-3 flex items-center hover:bg-gray-100"
-                  >
-                    <img
-                      src="/img/topping-icon.png"
-                      className="w-5 mr-2"
-                      alt="topping"
-                    />
-                    Add Topping
-                  </Link>
+                  {props.isAdmin ? (
+                    <>
+                      <Link
+                        to="/add-product"
+                        className="p-4 flex items-center hover:bg-gray-100"
+                      >
+                        <img
+                          src="/img/drink-icon.png"
+                          className="w-5 mr-2"
+                          alt="drink"
+                        />
+                        Add Product
+                      </Link>
+                      <Link
+                        to="/add-topping"
+                        className="p-4 flex items-center hover:bg-gray-100"
+                      >
+                        <img
+                          src="/img/topping-icon.png"
+                          className="w-5 mr-2"
+                          alt="topping"
+                        />
+                        Add Topping
+                      </Link>
+                      <Link
+                        to="/transactions"
+                        className="p-4 flex items-center hover:bg-gray-100"
+                      >
+                        <img
+                          src="/img/user-icon.png"
+                          className="w-5 mr-2"
+                          alt="topping"
+                        />
+                        Transactions
+                      </Link>
+                    </>
+                  ) : (
+                    <Link
+                      to="/customer"
+                      className="p-4 flex items-center hover:bg-gray-100"
+                    >
+                      <img
+                        src="/img/user-icon.png"
+                        className="w-5 mr-2"
+                        alt="topping"
+                      />
+                      My Profile
+                    </Link>
+                  )}
                   <hr />
-                  <Link
+                  <div
+                    onClick={() => toggleLoggedIn()}
                     to="/"
-                    className="p-3 flex items-center hover:bg-gray-100"
+                    className="p-4 flex items-center hover:bg-gray-100 cursor-pointer"
                   >
                     <img
                       src="/img/logout-icon.png"
@@ -99,7 +129,7 @@ function Navbar(props) {
                       alt="logout"
                     />
                     Logout
-                  </Link>
+                  </div>
                 </ul>
               </div>
             </div>
@@ -215,7 +245,7 @@ function Navbar(props) {
 
                             <div className="text-center">
                               <button
-                                onClick={() => loggedIn()}
+                                onClick={() => toggleLoggedIn()}
                                 type="button"
                                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-brand-red focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                               >
@@ -362,7 +392,7 @@ function Navbar(props) {
 
                             <div className="text-center mt-4">
                               <button
-                                onClick={() => loggedIn()}
+                                onClick={() => toggleLoggedIn()}
                                 type="button"
                                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-brand-red focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                               >

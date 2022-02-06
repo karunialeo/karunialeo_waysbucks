@@ -2,7 +2,7 @@ import React from "react";
 
 function ProductCard(props) {
   return (
-    <div className="product-card rounded-md relative w-80 lg:w-max bg-brand-pink">
+    <div className="product-card rounded-md relative mb-10 lg:mb-0 w-80 lg:w-max bg-brand-pink">
       <div>
         <img
           src={"/img/products/" + props.image + ".png"}

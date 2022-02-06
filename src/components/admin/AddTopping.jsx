@@ -1,10 +1,10 @@
-export default function AddProduct(props) {
+export default function AddTopping(props) {
   if (props.isAdmin) {
     return (
       <div className="flex flex-col lg:flex-row justify-between mx-4 lg:mx-28 my-10">
         <div className="w-full lg:w-7/12">
           <h4 className="text-3xl lg:text-5xl font-bold font-['Avenir-Black'] text-brand-red">
-            Add New Product
+            Add New Topping
           </h4>
           <form
             action="/"
@@ -13,35 +13,36 @@ export default function AddProduct(props) {
           >
             <input
               type="text"
-              name="addProductName"
+              name="addToppingName"
               placeholder="Name Product"
               className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
             />
             <input
               type="text"
-              name="addProductPrice"
+              name="addToppingPrice"
               placeholder="Price"
               className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
             />
             <input
               type="text"
-              name="addProductPhoto"
+              name="addToppingPhoto"
               placeholder="Photo"
               className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
             />
             <button className="w-full lg:w-9/12 py-2 rounded-md text-white text-center bg-brand-red">
-              Add Product
+              Add Topping
             </button>
           </form>
         </div>
-        <div className="w-full lg:w-4/12 mb-8 lg:mb-0 flex justify-center">
+        <div className="w-full lg:w-4/12 flex justify-center items-center">
           <img
-            src="/img/products/product-4.png"
-            alt="product"
-            className="w-9/12 lg:w-full"
+            src="/img/toppings/topping-2.png"
+            alt="toppings"
+            className="w-40 lg:w-64"
           />
         </div>
       </div>
     );
   }
+  return <h1>Test</h1>;
 }

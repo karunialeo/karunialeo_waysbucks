@@ -1,3 +1,4 @@
+import { LogoWhite, QRImg } from "../exports/exportImages";
 import Transactions from "../tempDatabase/Transactions";
 
 import thousandSeparator from "../utils/thousandSeparator";
@@ -8,11 +9,7 @@ export default function TransactionCard() {
       <div className="w-full lg:w-8/12 space-y-4 mb-4 lg:mb-0">
         {Transactions.map((item) => (
           <div className="flex">
-            <img
-              src="/img/products/product-1.png"
-              alt="product"
-              className="w-3/12"
-            />
+            <img src={item.image} alt="product" className="w-3/12" />
             <div className="text-brand-red font-['Avenir-Book'] space-y-4 ml-2">
               <h4 className="text-md font-['Avenir-Black'] font-bold">
                 {item.productName}
@@ -27,8 +24,8 @@ export default function TransactionCard() {
         ))}
       </div>
       <div className="flex flex-row lg:flex-col justify-between lg:justify-start items-center lg:space-y-4">
-        <img src="/logo.png" alt="" className="" />
-        <img src="/img/qr.png" alt="" />
+        <img src={LogoWhite} alt="" className="" />
+        <img src={QRImg} alt="" />
         <div className="space-y-7">
           <p className="text-sm bg-blue-200 text-blue-500 font-bold px-5 py-1 rounded-md">
             On The Way

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { IceCoffeePalmSugar } from "../exports/exportImages";
 import Toppings from "../tempDatabase/Toppings";
 import thousandSeparator from "../utils/thousandSeparator";
 
@@ -21,7 +22,7 @@ export default function ProductDesc({ item }) {
       <div className="mx-8 lg:pt-10 pb-20 lg:mx-32 lg:flex">
         <div className="img my-8 lg:my-0 w-full lg:w-5/12">
           <img
-            src="/img/products/product-1.png"
+            src={IceCoffeePalmSugar}
             alt="product"
             className="w-full lg:w-96"
           />
@@ -45,11 +46,7 @@ export default function ProductDesc({ item }) {
                     type="button"
                     className="w-1/2 lg:w-1/4 mt-10 flex flex-col items-center relative"
                   >
-                    <img
-                      src={`/img/toppings/topping-${item.toppingIndex}.png`}
-                      alt=""
-                      className="hover:opacity-75"
-                    />
+                    <img src={item.image} alt="" className="hover:opacity-75" />
                     <h4 className="mt-3 text-sm" key={item.toppingIndex}>
                       {item.toppingName}
                     </h4>

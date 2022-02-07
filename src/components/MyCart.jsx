@@ -16,7 +16,7 @@ function MyCart() {
               <div key={item.id} className="flex justify-between">
                 <div className="flex my-4 gap-x-4">
                   <img
-                    src={`/img/products/${item.productImg}`}
+                    src={item.image}
                     className="h-20 w-20 object-cover rounded-lg"
                     alt="product"
                   />

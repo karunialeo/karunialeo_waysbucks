@@ -1,7 +1,9 @@
+import { IceCoffeePalmSugar } from "../exports/exportImages";
+
 const Transactions = [
   {
     id: 1,
-    productImg: "product-1.png",
+    image: IceCoffeePalmSugar,
     productName: "Ice Coffee Palm Sugar",
     orderDate: "Saturday, 5 March 2022",
     topping: "Bill Berry Boba, Bubble Tea Gelatin",
@@ -9,7 +11,7 @@ const Transactions = [
   },
   {
     id: 2,
-    productImg: "product-1.png",
+    image: IceCoffeePalmSugar,
     productName: "Ice Coffee Palm Sugar",
     orderDate: "Saturday, 5 March 2022",
     topping: "Bill Berry Boba, Manggo",

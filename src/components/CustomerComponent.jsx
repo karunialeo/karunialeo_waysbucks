@@ -1,3 +1,4 @@
+import { UserImg } from "../exports/exportImages";
 import TransactionCard from "./TransactionCard";
 
 export default function CustomerComponent() {
@@ -9,7 +10,7 @@ export default function CustomerComponent() {
         </h3>
         <div className="flex">
           <div className="mr-4 lg:mr-8">
-            <img src="/img/user.png" alt="" />
+            <img src={UserImg} alt="" />
           </div>
           <div className="space-y-4">
             <p className="text-yellow-700 font-bold">Full Name</p>

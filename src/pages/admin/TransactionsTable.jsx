@@ -6,25 +6,25 @@ import TransactionCard from "../TransactionCard";
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-export default function TransactionsTable() {
+import { CancelIcon, ConfirmIcon } from "../../exports/exportImages";
+
+export default function TransactionsTable(props) {
   const [openTransactionModal, setOpenTransactionModal] = useState(false);
 
-  const cancelButtonRef = useRef(null);
-
   function checkStatus(status) {
-    if (status == "Waiting Approve") {
+    if (status === "Waiting Approve") {
       return "text-yellow-500";
-    } else if (status == "Success") {
+    } else if (status === "Success") {
       return "text-green-500";
-    } else if (status == "Cancel") {
+    } else if (status === "Cancel") {
       return "text-red-500";
-    } else if (status == "On The Way") {
+    } else if (status === "On The Way") {
       return "text-cyan-500";
     }
   }
 
   function checkAction(status) {
-    if (status == "Waiting Approve") {
+    if (status === "Waiting Approve") {
       return (
         <>
           <span className="px-4 inline-flex text-xs leading-5 font-semibold rounded-md bg-button-cancel text-white">
@@ -35,22 +35,22 @@ export default function TransactionsTable() {
           </span>
         </>
       );
-    } else if (status == "Success") {
+    } else if (status === "Success") {
       return (
         <>
-          <img src="/img/confirm.png" alt="" />
+          <img src={ConfirmIcon} alt="" />
         </>
       );
-    } else if (status == "Cancel") {
+    } else if (status === "Cancel") {
       return (
         <>
-          <img src="/img/cancel.png" alt="" />
+          <img src={CancelIcon} alt="" />
         </>
       );
-    } else if (status == "On The Way") {
+    } else if (status === "On The Way") {
       return (
         <>
-          <img src="/img/confirm.png" alt="" />
+          <img src={ConfirmIcon} alt="" />
         </>
       );
     }

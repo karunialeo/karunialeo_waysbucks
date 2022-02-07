@@ -15,7 +15,7 @@ function Menu() {
           <Link to={`/product/${item.productIndex}`}>
             <ProductCard
               name={item.productName}
-              image={`product-${item.productIndex}`}
+              image={item.image}
               price={thousandSeparator(item.price)}
             />
           </Link>

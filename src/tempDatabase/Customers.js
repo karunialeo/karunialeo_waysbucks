@@ -5,7 +5,7 @@ const Customers = [
     status: "Waiting Approve",
     postcode: 14045,
     income: 69000,
-    email: "jane.cooper@example.com",
+    email: "rizal@mail.com",
   },
   {
     name: "Asep Udin",
@@ -13,7 +13,7 @@ const Customers = [
     status: "Success",
     postcode: 10200,
     income: 30000,
-    email: "asep.cooper@example.com",
+    email: "asep@mail.com",
   },
   {
     name: "Robby Shakti",
@@ -21,7 +21,7 @@ const Customers = [
     status: "Cancel",
     postcode: 14045,
     income: 28000,
-    email: "jane.cooper@example.com",
+    email: "robby@mail.com",
   },
   {
     name: "Passyah Ungu",
@@ -29,7 +29,7 @@ const Customers = [
     status: "On The Way",
     postcode: 10200,
     income: 30000,
-    email: "asep.cooper@example.com",
+    email: "passyah@mail.com",
   },
   {
     name: "Subhan Sejati",
@@ -37,7 +37,7 @@ const Customers = [
     status: "Waiting Approve",
     postcode: 14045,
     income: 72000,
-    email: "jane.cooper@example.com",
+    email: "subhan@mail.com",
   },
 ];
 

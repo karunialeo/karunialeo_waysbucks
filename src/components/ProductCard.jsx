@@ -4,11 +4,7 @@ function ProductCard(props) {
   return (
     <div className="product-card rounded-md relative mb-10 lg:mb-0 w-80 lg:w-max bg-brand-pink">
       <div>
-        <img
-          src={"/img/products/" + props.image + ".png"}
-          alt="product-1"
-          className="w-full"
-        />
+        <img src={props.image} alt="product-1" className="w-full" />
         <img
           src="/logo-2.png"
           alt="logo"

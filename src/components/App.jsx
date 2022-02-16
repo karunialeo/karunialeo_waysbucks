@@ -3,6 +3,9 @@ import "../assets/styles/App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import CustomerRoute from "./auth/CustomerRoute";
+import AdminRoute from "./auth/AdminRoute";
+
 import { LoginProvider, RegisteredProvider } from "./contexts/AuthContext";
 import { ModalProvider } from "./contexts/ModalContext";
 
@@ -42,11 +45,17 @@ export default function App() {
             }
           />
           <Route path="/product/:id" element={<ProductDesc />} />
-          <Route path="/my-cart" element={<MyCart />} />
-          <Route path="/add-product" element={<AddProduct />} />
-          <Route path="/add-topping" element={<AddTopping />} />
-          <Route path="/transactions" element={<TransactionsTable />} />
-          <Route path="/profile" element={<CustomerComponent />} />
+          <Route exact path="/" element={<CustomerRoute />}>
+            <Route path="/my-cart" element={<MyCart />} />
+            <Route path="/profile" element={<CustomerComponent />} />
+          </Route>
+          <Route exact path="/" element={<AdminRoute />}>
+            <Route path="/my-cart" element={<MyCart />} />
+            <Route path="/profile" element={<CustomerComponent />} />
+            <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/add-topping" element={<AddTopping />} />
+            <Route path="/transactions" element={<TransactionsTable />} />
+          </Route>
         </Routes>
       </Router>
     </LoginProvider>

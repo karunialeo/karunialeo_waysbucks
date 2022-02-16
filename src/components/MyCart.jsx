@@ -1,9 +1,15 @@
+import { useEffect } from "react";
+import { globalTitle } from "./App";
 import { Link } from "react-router-dom";
 import Transactions from "../tempDatabase/Transactions";
 import thousandSeparator from "../utils/thousandSeparator";
 import PaymentForm from "./PaymentForm";
 
 function MyCart() {
+  useEffect(() => {
+    document.title = globalTitle + "My Cart";
+  }, []);
+
   return (
     <div className="text-brand-red font-['Avenir-Book'] mx-4 lg:mx-28 mt-8 mb-20">
       <h4 className="font-['Avenir-Black'] font-bold text-3xl mb-8">My Cart</h4>

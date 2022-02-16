@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { globalTitle } from "./App";
 
 function Jumbotron() {
+  useEffect(() => {
+    document.title = globalTitle + "Home";
+  }, []);
+
   return (
     <div className="mx-4 lg:mx-32 my-2 lg:mt-10 lg:mb-20 relative h-80 lg:h-full">
       <img

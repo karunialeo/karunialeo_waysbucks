@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./App.css";
+import "../assets/styles/App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -18,6 +18,8 @@ import {
   TransactionsTable,
   CustomerComponent,
 } from "../exports/";
+
+export const globalTitle = "Waysbucks Store | ";
 
 export default function App() {
   return (

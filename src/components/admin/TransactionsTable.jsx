@@ -1,12 +1,17 @@
+import { Fragment, useRef, useState, useEffect } from "react";
+import { globalTitle } from "../App";
+import { Dialog, Transition } from "@headlessui/react";
+
 import thousandSeparator from "../../utils/thousandSeparator";
 import Customers from "../../tempDatabase/Customers";
 
 import TransactionCard from "../TransactionCard";
 
-import { Fragment, useRef, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-
 export default function TransactionsTable() {
+  useEffect(() => {
+    document.title = globalTitle + "Transactions";
+  }, []);
+
   const [openTransactionModal, setOpenTransactionModal] = useState(false);
 
   const cancelButtonRef = useRef(null);

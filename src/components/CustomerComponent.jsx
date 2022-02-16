@@ -1,7 +1,13 @@
+import { useEffect } from "react";
+import { globalTitle } from "./App";
 import { UserImg } from "../exports/exportImages";
 import TransactionCard from "./TransactionCard";
 
 export default function CustomerComponent() {
+  useEffect(() => {
+    document.title = globalTitle + "My Profile";
+  }, []);
+
   return (
     <div className="lg:flex justify-between mx-4 lg:mx-28 my-10">
       <div className="w-full lg:w-1/2 mb-10 lg:mb-0">

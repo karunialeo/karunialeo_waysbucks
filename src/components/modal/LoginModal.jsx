@@ -2,10 +2,13 @@ import React, { useContext } from "react";
 
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { LogoWhite } from "../../exports/exportImages";
-import { RegisteredContext } from "../contexts/AuthContext";
+import { LoginContext, RegisteredContext } from "../contexts/AuthContext";
+import { ModalContext } from "../contexts/ModalContext";
 
 export default function LoginModal() {
   const [registered, setRegistered] = useContext(RegisteredContext);
+  const [login, setLogin] = useContext(LoginContext);
+  const [open, setOpen] = useContext(ModalContext);
 
   return (
     <>
@@ -49,6 +52,10 @@ export default function LoginModal() {
           <button
             type="button"
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-brand-red focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            onClick={() => {
+              setLogin(!login);
+              setOpen(!open);
+            }}
           >
             <span className="absolute left-0 inset-y-0 flex items-center pl-3">
               <LockClosedIcon

@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IceCoffeePalmSugar } from "../exports/exportImages";
 import Toppings from "../tempDatabase/Toppings";
 import thousandSeparator from "../utils/thousandSeparator";
+import { globalTitle } from "./App";
 
 export default function ProductDesc({ item }) {
   const [price, setPrice] = useState(27000);
   const [useTopping, setUseTopping] = useState(false);
+
+  useEffect(() => {
+    document.title = globalTitle + "Product";
+  }, []);
 
   function toggleAddTopping() {
     if (!useTopping) {

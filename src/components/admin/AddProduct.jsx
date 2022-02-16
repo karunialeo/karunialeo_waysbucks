@@ -1,4 +1,11 @@
+import { useEffect } from "react";
+import { globalTitle } from "../App";
+
 export default function AddProduct() {
+  useEffect(() => {
+    document.title = globalTitle + "Add Product";
+  }, []);
+
   return (
     <div className="flex flex-col lg:flex-row justify-between mx-4 lg:mx-28 my-10">
       <div className="w-full lg:w-7/12">

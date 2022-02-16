@@ -28,12 +28,12 @@ function Navbar() {
       <Link to="/">
         <img src={LogoWhite} alt="" />
       </Link>
-      <div className="w-1/3 space-x-2 justify-end flex items-center relative">
+      <div className="space-x-5 justify-end flex items-center relative">
         {login ? (
           <>
             <Link to="/my-cart" className="relative">
               <img src={BasketIcon} alt="shopping-basket" />
-              <div className="w-5 h-5 text-xs text-white font-bold bg-red-600 rounded-full absolute right-6 -top-1 flex justify-center items-center">
+              <div className="w-5 h-5 text-xs text-white font-bold bg-red-600 rounded-full absolute -right-2 -top-1 flex justify-center items-center">
                 {Transactions.length}
               </div>
             </Link>

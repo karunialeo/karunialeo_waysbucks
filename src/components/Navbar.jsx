@@ -2,12 +2,17 @@ import { Fragment, useRef, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
 
-import { LoginContext, RegisteredContext } from "./contexts/AuthContext";
+import {
+  AdminContext,
+  LoginContext,
+  RegisteredContext,
+} from "./contexts/AuthContext";
 import { ModalContext } from "./contexts/ModalContext";
 
 import {
   BasketIcon,
   DrinkIcon,
+  LogoBlack,
   LogoutIcon,
   LogoWhite,
   ToppingIcon,
@@ -19,6 +24,7 @@ import Transactions from "../tempDatabase/Transactions";
 
 function Navbar() {
   const [login, setLogin] = useContext(LoginContext);
+  const [admin, setAdmin] = useContext(AdminContext);
   const [registered, setRegistered] = useContext(RegisteredContext);
 
   const [open, setOpen] = useContext(ModalContext);
@@ -42,7 +48,7 @@ function Navbar() {
                 <Menu.Button>
                   <span className="sr-only">Open user menu</span>
                   <img
-                    src={UserImg}
+                    src={admin ? LogoBlack : UserImg}
                     alt="user"
                     className="h-14 w-14 object-cover rounded-full border-2 border-brand-red"
                   />
@@ -58,50 +64,65 @@ function Navbar() {
                 leaveTo="transform opacity-0 scale-95"
               >
                 <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <Menu.Item>
-                    <Link
-                      to="/add-product"
-                      className="p-4 flex items-center hover:bg-gray-100"
-                    >
-                      <img src={DrinkIcon} className="w-5 mr-2" alt="drink" />
-                      Add Product
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <Link
-                      to="/add-topping"
-                      className="p-4 flex items-center hover:bg-gray-100"
-                    >
-                      <img
-                        src={ToppingIcon}
-                        className="w-5 mr-2"
-                        alt="topping"
-                      />
-                      Add Topping
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <Link
-                      to="/transactions"
-                      className="p-4 flex items-center hover:bg-gray-100"
-                    >
-                      <img
-                        src={userIcon}
-                        className="w-5 mr-2"
-                        alt="transactions"
-                      />
-                      Transactions
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <Link
-                      to="/profile"
-                      className="p-4 flex items-center hover:bg-gray-100"
-                    >
-                      <img src={userIcon} className="w-5 mr-2" alt="profile" />
-                      My Profile
-                    </Link>
-                  </Menu.Item>
+                  {admin ? (
+                    <>
+                      <Menu.Item>
+                        <Link
+                          to="/add-product"
+                          className="p-4 flex items-center hover:bg-gray-100"
+                        >
+                          <img
+                            src={DrinkIcon}
+                            className="w-5 mr-2"
+                            alt="drink"
+                          />
+                          Add Product
+                        </Link>
+                      </Menu.Item>
+                      <Menu.Item>
+                        <Link
+                          to="/add-topping"
+                          className="p-4 flex items-center hover:bg-gray-100"
+                        >
+                          <img
+                            src={ToppingIcon}
+                            className="w-5 mr-2"
+                            alt="topping"
+                          />
+                          Add Topping
+                        </Link>
+                      </Menu.Item>
+                      <Menu.Item>
+                        <Link
+                          to="/transactions"
+                          className="p-4 flex items-center hover:bg-gray-100"
+                        >
+                          <img
+                            src={userIcon}
+                            className="w-5 mr-2"
+                            alt="transactions"
+                          />
+                          Transactions
+                        </Link>
+                      </Menu.Item>
+                    </>
+                  ) : (
+                    <>
+                      <Menu.Item>
+                        <Link
+                          to="/profile"
+                          className="p-4 flex items-center hover:bg-gray-100"
+                        >
+                          <img
+                            src={userIcon}
+                            className="w-5 mr-2"
+                            alt="profile"
+                          />
+                          My Profile
+                        </Link>
+                      </Menu.Item>
+                    </>
+                  )}
                   <hr />
                   <Menu.Item onClick={() => setLogin(false)}>
                     <div className="p-4 flex items-center hover:bg-gray-100 cursor-pointer">

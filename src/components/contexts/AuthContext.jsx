@@ -27,7 +27,7 @@ export const AdminProvider = ({ children }) => {
 export const RegisteredContext = createContext();
 
 export const RegisteredProvider = ({ children }) => {
-  const [registered, setRegistered] = useState(false);
+  const [registered, setRegistered] = useState(true);
 
   return (
     <RegisteredContext.Provider value={[registered, setRegistered]}>

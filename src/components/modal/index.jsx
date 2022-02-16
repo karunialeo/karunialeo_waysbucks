@@ -1,17 +1,22 @@
-import { Fragment, useRef } from "react";
+import { Fragment, useContext, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { LoginModal } from "../../exports";
+import { LoginModal, RegisterModal } from "../../exports";
+import { ModalContext } from "../contexts/ModalContext";
+import { RegisteredContext } from "../contexts/AuthContext";
 
 export default function Modal(props) {
+  const [open, setOpen] = useContext(ModalContext);
+  const [registered, setRegistered] = useContext(RegisteredContext);
+
   const cancelButtonRef = useRef(null);
 
   return (
-    <Transition.Root show={props.state} as={Fragment}>
+    <Transition.Root show={open} as={Fragment}>
       <Dialog
         as="div"
         className="fixed z-10 inset-0 overflow-y-auto"
         initialFocus={cancelButtonRef}
-        onClose={props.setOpenModal}
+        onClose={() => setOpen(!open)}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -49,7 +54,7 @@ export default function Modal(props) {
                     <div className="mt-2"></div>
                     <div className="min-h-full flex items-center justify-center sm:px-6 lg:px-8">
                       <div className="max-w-md w-full space-y-8">
-                        <LoginModal />
+                        {registered ? <LoginModal /> : <RegisterModal />}
                       </div>
                     </div>
                   </div>

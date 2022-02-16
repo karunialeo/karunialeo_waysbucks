@@ -1,7 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import { LoginProvider, RegisteredProvider } from "./contexts/AuthContext";
+import { ModalProvider } from "./contexts/ModalContext";
 
 import {
   Modal,
@@ -16,14 +19,16 @@ import {
   CustomerComponent,
 } from "../exports/";
 
-function App() {
-  const [openModal, setOpenModal] = useState(true);
-
+export default function App() {
   return (
-    <>
+    <LoginProvider>
       <Router>
-        <Navbar />
-        <Modal state={openModal} setOpenModal={setOpenModal} />
+        <ModalProvider>
+          <RegisteredProvider>
+            <Navbar />
+            <Modal />
+          </RegisteredProvider>
+        </ModalProvider>
         <Routes>
           <Route
             path="/"
@@ -42,8 +47,6 @@ function App() {
           <Route path="/profile" element={<CustomerComponent />} />
         </Routes>
       </Router>
-    </>
+    </LoginProvider>
   );
 }
-
-export default App;

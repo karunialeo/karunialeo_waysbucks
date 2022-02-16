@@ -1,7 +1,12 @@
+import React, { useContext } from "react";
+
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { LogoWhite } from "../../exports/exportImages";
+import { RegisteredContext } from "../contexts/AuthContext";
 
 export default function LoginModal() {
+  const [registered, setRegistered] = useContext(RegisteredContext);
+
   return (
     <>
       <div>
@@ -55,7 +60,11 @@ export default function LoginModal() {
           </button>
           <p className="font-['Avenir-Book'] mt-3">
             Don't have an account?{" "}
-            <button type="button" className="font-bold">
+            <button
+              type="button"
+              className="font-bold"
+              onClick={() => setRegistered(!registered)}
+            >
               Click Here
             </button>
           </p>

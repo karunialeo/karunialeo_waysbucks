@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { IceCoffeePalmSugar } from "../exports/exportImages";
 import Toppings from "../tempDatabase/Toppings";
 import thousandSeparator from "../utils/thousandSeparator";
-import { globalTitle } from "./App";
+import { globalTitle } from "../components/App";
 
 export default function ProductDesc({ item }) {
   const [price, setPrice] = useState(27000);
@@ -50,11 +50,10 @@ export default function ProductDesc({ item }) {
                     onClick={toggleAddTopping}
                     type="button"
                     className="w-1/2 lg:w-1/4 mt-10 flex flex-col items-center relative"
+                    key={item.toppingName}
                   >
                     <img src={item.image} alt="" className="hover:opacity-75" />
-                    <h4 className="mt-3 text-sm" key={item.toppingIndex}>
-                      {item.toppingName}
-                    </h4>
+                    <h4 className="mt-3 text-sm">{item.toppingName}</h4>
                     {useTopping ? <CheckTopping /> : null}
                   </button>
                 </>

@@ -10,21 +10,25 @@ import {
   AdminProvider,
   LoginProvider,
   RegisteredProvider,
-} from "./contexts/AuthContext";
-import { ModalProvider } from "./contexts/ModalContext";
+} from "../contexts/AuthContext";
 
 import {
-  Modal,
-  Navbar,
-  Jumbotron,
-  Menu,
+  ModalProvider,
+  TransactionModalProvider,
+  CartModalProvider,
+} from "../contexts/ModalContext";
+
+import {
+  LandingPage,
   ProductDesc,
+  MyProfile,
   MyCart,
   AddProduct,
   AddTopping,
   TransactionsTable,
-  CustomerComponent,
-} from "../exports/";
+} from "../exports/exportPages";
+
+import { Modal, Navbar } from "../exports/";
 
 export const globalTitle = "Waysbucks Store | ";
 
@@ -40,29 +44,32 @@ export default function App() {
             </RegisteredProvider>
           </ModalProvider>
           <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Jumbotron />
-                  <Menu />
-                </>
-              }
-            />
+            <Route path="/" element={<LandingPage />} />
             <Route path="/product/:id" element={<ProductDesc />} />
 
             <Route exact path="/" element={<CustomerRoute />}>
-              <Route path="/my-cart" element={<MyCart />} />
-              <Route path="/profile" element={<CustomerComponent />} />
-              <Route path="/add-product" element={<AddProduct />} />
-              <Route path="/add-topping" element={<AddTopping />} />
-              <Route path="/transactions" element={<TransactionsTable />} />
+              <Route
+                path="/my-cart"
+                element={
+                  <CartModalProvider>
+                    <MyCart />
+                  </CartModalProvider>
+                }
+              />
+              <Route path="/profile" element={<MyProfile />} />
             </Route>
 
             <Route exact path="/" element={<AdminRoute />}>
               <Route path="/add-product" element={<AddProduct />} />
               <Route path="/add-topping" element={<AddTopping />} />
-              <Route path="/transactions" element={<TransactionsTable />} />
+              <Route
+                path="/transactions"
+                element={
+                  <TransactionModalProvider>
+                    <TransactionsTable />
+                  </TransactionModalProvider>
+                }
+              />
             </Route>
           </Routes>
         </Router>

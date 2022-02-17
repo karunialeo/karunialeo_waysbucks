@@ -6,8 +6,8 @@ import {
   AdminContext,
   LoginContext,
   RegisteredContext,
-} from "./contexts/AuthContext";
-import { ModalContext } from "./contexts/ModalContext";
+} from "../contexts/AuthContext";
+import { ModalContext } from "../contexts/ModalContext";
 
 import {
   BasketIcon,
@@ -37,11 +37,16 @@ function Navbar() {
       <div className="space-x-5 justify-end flex items-center relative">
         {login ? (
           <>
-            <Link to="/my-cart" className="relative">
+            <Link
+              to={admin ? "/transactions" : "/my-cart"}
+              className="relative"
+            >
               <img src={BasketIcon} alt="shopping-basket" />
-              <div className="w-5 h-5 text-xs text-white font-bold bg-red-600 rounded-full absolute -right-2 -top-1 flex justify-center items-center">
-                {Transactions.length}
-              </div>
+              {admin ? null : Transactions.length > 0 ? (
+                <div className="w-5 h-5 text-xs text-white font-bold bg-red-600 rounded-full absolute -right-2 -top-1 flex justify-center items-center">
+                  {Transactions.length}
+                </div>
+              ) : null}
             </Link>
             <Menu as="div" className="relative z-10">
               <div>
@@ -90,19 +95,6 @@ function Navbar() {
                             alt="topping"
                           />
                           Add Topping
-                        </Link>
-                      </Menu.Item>
-                      <Menu.Item>
-                        <Link
-                          to="/transactions"
-                          className="p-4 flex items-center hover:bg-gray-100"
-                        >
-                          <img
-                            src={userIcon}
-                            className="w-5 mr-2"
-                            alt="transactions"
-                          />
-                          Transactions
                         </Link>
                       </Menu.Item>
                     </>

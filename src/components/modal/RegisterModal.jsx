@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { LogoWhite } from "../../exports/exportImages";
-import { RegisteredContext } from "../contexts/AuthContext";
+import { RegisteredContext } from "../../contexts/AuthContext";
 
 export default function RegisterModal() {
   const [registered, setRegistered] = useContext(RegisteredContext);
@@ -19,20 +19,6 @@ export default function RegisterModal() {
         <input type="hidden" name="remember" defaultValue="true" />
         <div className="-space-y-px">
           <div>
-            <label htmlFor="email-address" className="sr-only">
-              Email address
-            </label>
-            <input
-              id="email-address"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-              className="appearance-none rounded-md shadow-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm mb-4"
-              placeholder="Email"
-            />
-          </div>
-          <div>
             <label htmlFor="full-name" className="sr-only">
               Full Name
             </label>
@@ -44,6 +30,20 @@ export default function RegisterModal() {
               required
               className="appearance-none rounded-md shadow-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm mb-4"
               placeholder="Full Name"
+            />
+          </div>
+          <div>
+            <label htmlFor="email-address" className="sr-only">
+              Email address
+            </label>
+            <input
+              id="email-address"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              className="appearance-none rounded-md shadow-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm mb-4"
+              placeholder="Email"
             />
           </div>
           <div>

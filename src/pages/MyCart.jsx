@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { globalTitle } from "./App";
+import { globalTitle } from "../components/App";
 import { Link } from "react-router-dom";
 import Transactions from "../tempDatabase/Transactions";
 import thousandSeparator from "../utils/thousandSeparator";
-import PaymentForm from "./PaymentForm";
+import PaymentForm from "../components/PaymentForm";
 
 function MyCart() {
   useEffect(() => {

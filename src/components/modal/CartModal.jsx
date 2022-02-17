@@ -1,12 +1,10 @@
-import { Fragment, useContext, useRef } from "react";
+import { useRef, Fragment, useContext } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { LoginModal, RegisterModal } from "../../exports";
-import { ModalContext } from "../../contexts/ModalContext";
-import { RegisteredContext } from "../../contexts/AuthContext";
 
-export default function Modal() {
-  const [open, setOpen] = useContext(ModalContext);
-  const [registered, setRegistered] = useContext(RegisteredContext);
+import { CartModalContext } from "../../contexts/ModalContext";
+
+export default function CartModal() {
+  const [open, setOpen] = useContext(CartModalContext);
 
   const cancelButtonRef = useRef(null);
 
@@ -16,7 +14,7 @@ export default function Modal() {
         as="div"
         className="fixed z-10 inset-0 overflow-y-auto"
         initialFocus={cancelButtonRef}
-        onClose={() => setOpen(!open)}
+        onClose={setOpen}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -31,6 +29,7 @@ export default function Modal() {
             <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
           </Transition.Child>
 
+          {/* This element is to trick the browser into centering the modal contents. */}
           <span
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
             aria-hidden="true"
@@ -46,19 +45,10 @@ export default function Modal() {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="flex justify-center sm:items-start">
-                  <div className="mt-3 md:w-96 text-center sm:mt-0 sm:text-left">
-                    <div className="mt-2"></div>
-                    <div className="min-h-full flex items-center justify-center sm:px-6 lg:px-8">
-                      <div className="max-w-md w-full space-y-8">
-                        {registered ? <LoginModal /> : <RegisterModal />}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="inline-block font-['Avenir-Book'] text-center text-green-500 align-bottom bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+              <p className="my-6 lg:mx-12 text-lg">
+                Thank you for ordering in us, please wait to verify you order
+              </p>
             </div>
           </Transition.Child>
         </div>

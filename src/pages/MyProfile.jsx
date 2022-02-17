@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { globalTitle } from "./App";
+import { globalTitle } from "../components/App";
 import { UserImg } from "../exports/exportImages";
-import TransactionCard from "./TransactionCard";
+import TransactionCard from "../components/TransactionCard";
 
-export default function CustomerComponent() {
+export default function MyProfile() {
   useEffect(() => {
     document.title = globalTitle + "My Profile";
   }, []);

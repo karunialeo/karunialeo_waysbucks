@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { LogoWhite } from "../../exports/exportImages";
-import { LoginContext, RegisteredContext } from "../contexts/AuthContext";
-import { ModalContext } from "../contexts/ModalContext";
+import { LoginContext, RegisteredContext } from "../../contexts/AuthContext";
+import { ModalContext } from "../../contexts/ModalContext";
 
 export default function LoginModal() {
   const [registered, setRegistered] = useContext(RegisteredContext);

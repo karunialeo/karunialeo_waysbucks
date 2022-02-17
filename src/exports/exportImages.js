@@ -8,6 +8,7 @@ import DrinkIcon from "../assets/images/icons/drink-icon.png";
 import InvoiceIcon from "../assets/images/icons/invoice.png";
 import LogoutIcon from "../assets/images/icons/logout-icon.png";
 import ToppingIcon from "../assets/images/icons/topping-icon.png";
+import UploadIcon from "../assets/images/icons/upload.png";
 import userIcon from "../assets/images/icons/user-icon.png";
 
 import JumbotronBg from "../assets/images/jumbotron/jumbotron.png";
@@ -42,6 +43,7 @@ export {
   InvoiceIcon,
   LogoutIcon,
   ToppingIcon,
+  UploadIcon,
   userIcon,
   JumbotronBg,
   JumbotronImg,

@@ -5,6 +5,7 @@ import thousandSeparator from "../../utils/thousandSeparator";
 import Customers from "../../tempDatabase/Customers";
 import TransactionModal from "../../components/modal/TransactionModal";
 import { TransactionModalContext } from "../../contexts/ModalContext";
+import { CancelIcon, ConfirmIcon } from "../../exports/exportImages";
 
 export default function TransactionsTable() {
   const [open, setOpen] = useContext(TransactionModalContext);
@@ -39,19 +40,19 @@ export default function TransactionsTable() {
     } else if (status == "Success") {
       return (
         <>
-          <img src="/img/confirm.png" alt="" />
+          <img src={ConfirmIcon} alt="" />
         </>
       );
     } else if (status == "Cancel") {
       return (
         <>
-          <img src="/img/cancel.png" alt="" />
+          <img src={CancelIcon} alt="" />
         </>
       );
     } else if (status == "On The Way") {
       return (
         <>
-          <img src="/img/confirm.png" alt="" />
+          <img src={ConfirmIcon} alt="" />
         </>
       );
     }
@@ -60,11 +61,11 @@ export default function TransactionsTable() {
   return (
     <>
       <div className="my-10 font-['Avenir-Book']">
-        <h3 className="mx-32 text-brand-red text-3xl font-['Avenir-Black'] mb-10">
+        <h3 className="mx-4 lg:mx-32 text-brand-red text-3xl font-['Avenir-Black'] mb-10">
           Income Transaction
         </h3>
-        <div className="mx-40 flex justify-center">
-          <table className="w-full divide-y divide-x divide-gray-300 border-2">
+        <div className="lg:mx-40 mx-4 flex justify-start overflow-x-auto">
+          <table className="lg:w-full divide-y divide-x divide-gray-300 border-2">
             <thead className="bg-gray-200">
               <tr className="divide-x divide-gray-300">
                 <th
@@ -112,9 +113,9 @@ export default function TransactionsTable() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {Customers.map((customer) => (
-                <tr className="divide-x divide-gray-300" key={customer.email}>
-                  <td className="px-4 py-2 whitespace-nowrap">1</td>
+              {Customers.map((customer, i) => (
+                <tr className="divide-x divide-gray-300" key={i}>
+                  <td className="px-4 py-2 whitespace-nowrap">{i + 1}</td>
                   <td className="px-4 py-2 whitespace-nowrap">
                     {customer.name}
                   </td>

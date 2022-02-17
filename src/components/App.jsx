@@ -8,6 +8,7 @@ import AdminRoute from "./auth/AdminRoute";
 
 import {
   AdminProvider,
+  AlertProvider,
   LoginProvider,
   RegisteredProvider,
 } from "../contexts/AuthContext";
@@ -36,43 +37,45 @@ export default function App() {
   return (
     <AdminProvider>
       <LoginProvider>
-        <Router>
-          <ModalProvider>
-            <RegisteredProvider>
-              <Navbar />
-              <Modal />
-            </RegisteredProvider>
-          </ModalProvider>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/product/:id" element={<ProductDesc />} />
+        <AlertProvider>
+          <Router>
+            <ModalProvider>
+              <RegisteredProvider>
+                <Navbar />
+                <Modal />
+              </RegisteredProvider>
+            </ModalProvider>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/product/:id" element={<ProductDesc />} />
 
-            <Route exact path="/" element={<CustomerRoute />}>
-              <Route
-                path="/my-cart"
-                element={
-                  <CartModalProvider>
-                    <MyCart />
-                  </CartModalProvider>
-                }
-              />
-              <Route path="/profile" element={<MyProfile />} />
-            </Route>
+              <Route exact path="/" element={<CustomerRoute />}>
+                <Route
+                  path="/my-cart"
+                  element={
+                    <CartModalProvider>
+                      <MyCart />
+                    </CartModalProvider>
+                  }
+                />
+                <Route path="/profile" element={<MyProfile />} />
+              </Route>
 
-            <Route exact path="/" element={<AdminRoute />}>
-              <Route path="/add-product" element={<AddProduct />} />
-              <Route path="/add-topping" element={<AddTopping />} />
-              <Route
-                path="/transactions"
-                element={
-                  <TransactionModalProvider>
-                    <TransactionsTable />
-                  </TransactionModalProvider>
-                }
-              />
-            </Route>
-          </Routes>
-        </Router>
+              <Route exact path="/" element={<AdminRoute />}>
+                <Route path="/add-product" element={<AddProduct />} />
+                <Route path="/add-topping" element={<AddTopping />} />
+                <Route
+                  path="/transactions"
+                  element={
+                    <TransactionModalProvider>
+                      <TransactionsTable />
+                    </TransactionModalProvider>
+                  }
+                />
+              </Route>
+            </Routes>
+          </Router>
+        </AlertProvider>
       </LoginProvider>
     </AdminProvider>
   );

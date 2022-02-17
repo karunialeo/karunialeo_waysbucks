@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { globalTitle } from "../../components/App";
+import { Mango, UploadIcon } from "../../exports/exportImages";
 
 export default function AddTopping() {
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function AddTopping() {
                 type="file"
                 className="sr-only"
               />
-              <img className="h-5 mr-2" src="/img/upload.png" alt="" />
+              <img className="h-5 mr-2" src={UploadIcon} alt="" />
             </div>
           </label>
           <button className="w-full lg:w-9/12 py-2 rounded-md text-white text-center bg-brand-red">
@@ -52,11 +53,7 @@ export default function AddTopping() {
         </form>
       </div>
       <div className="w-full lg:w-4/12 flex justify-center items-center">
-        <img
-          src="/img/toppings/topping-2.png"
-          alt="toppings"
-          className="w-40 lg:w-64"
-        />
+        <img src={Mango} alt="toppings" className="w-40 lg:w-64" />
       </div>
     </div>
   );

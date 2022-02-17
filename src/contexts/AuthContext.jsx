@@ -15,7 +15,7 @@ export const LoginProvider = ({ children }) => {
 export const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
-  const [admin, setAdmin] = useState(false);
+  const [admin, setAdmin] = useState(true);
 
   return (
     <AdminContext.Provider value={[admin, setAdmin]}>
@@ -33,5 +33,17 @@ export const RegisteredProvider = ({ children }) => {
     <RegisteredContext.Provider value={[registered, setRegistered]}>
       {children}
     </RegisteredContext.Provider>
+  );
+};
+
+export const AlertContext = createContext();
+
+export const AlertProvider = ({ children }) => {
+  const [alert, setAlert] = useState(false);
+
+  return (
+    <AlertContext.Provider value={[alert, setAlert]}>
+      {children}
+    </AlertContext.Provider>
   );
 };

@@ -17,6 +17,7 @@ function Menu() {
               name={item.productName}
               image={item.image}
               price={thousandSeparator(item.price)}
+              key={item.productIndex}
             />
           </Link>
         ))}

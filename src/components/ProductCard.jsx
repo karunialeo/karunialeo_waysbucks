@@ -1,4 +1,5 @@
 import React from "react";
+import { LogoBlack, LogoWhite } from "../exports/exportImages";
 
 function ProductCard(props) {
   return (
@@ -6,7 +7,7 @@ function ProductCard(props) {
       <div>
         <img src={props.image} alt="product-1" className="w-full" />
         <img
-          src="/logo-2.png"
+          src={LogoWhite}
           alt="logo"
           className="absolute top-36 lg:top-28 left-24 w-32 lg:w-20 lg:left-20"
         />

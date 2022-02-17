@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { globalTitle } from "../../components/App";
+import { IceCoffeeGreenTea, UploadIcon } from "../../exports/exportImages";
 
 export default function AddProduct() {
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function AddProduct() {
                 type="file"
                 className="sr-only"
               />
-              <img className="h-5 mr-2" src="/img/upload.png" alt="" />
+              <img className="h-5 mr-2" src={UploadIcon} alt="" />
             </div>
           </label>
           <button className="w-full lg:w-9/12 py-2 rounded-md text-white text-center bg-brand-red">
@@ -53,7 +54,7 @@ export default function AddProduct() {
       </div>
       <div className="w-full lg:w-4/12 mb-8 lg:mb-0 flex justify-center">
         <img
-          src="/img/products/product-4.png"
+          src={IceCoffeeGreenTea}
           alt="product"
           className="w-9/12 lg:w-full"
         />

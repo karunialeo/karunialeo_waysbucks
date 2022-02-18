@@ -1,14 +1,97 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+
+import { API } from "../../config/api";
 
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { LogoWhite } from "../../exports/exportImages";
-import { LoginContext, RegisteredContext } from "../../contexts/AuthContext";
+import {
+  AdminContext,
+  LoginContext,
+  RegisteredContext,
+} from "../../contexts/AuthContext";
 import { ModalContext } from "../../contexts/ModalContext";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function LoginModal() {
+  let navigate = useNavigate();
+
   const [registered, setRegistered] = useContext(RegisteredContext);
   const [login, setLogin] = useContext(LoginContext);
+  const [admin, setAdmin] = useContext(AdminContext);
   const [open, setOpen] = useContext(ModalContext);
+  const [state, dispatch] = useContext(UserContext);
+
+  const [message, setMessage] = useState(null);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = form;
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      // Configuration
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      // Data body
+      const body = JSON.stringify(form);
+
+      // Insert data for login process
+      const response = await API.post("/login", body, config);
+
+      // Checking process
+      if (response?.status === 200) {
+        // Send data to useContext
+        dispatch({
+          type: "LOGIN_SUCCESS",
+          payload: response.data.data,
+        });
+
+        setOpen(false);
+        // Status check
+        if (response.data.data.status === "admin") {
+          navigate("/");
+          setAdmin(true);
+        } else {
+          navigate("/");
+          setAdmin(false);
+        }
+
+        // const alert = (
+        //   <Alert variant="success" className="py-1">
+        //     Login success
+        //   </Alert>
+        // );
+        // setMessage(alert);
+      }
+    } catch (error) {
+      const alert = (
+        <div
+          class="flex items-center text-red-500 border border-red-500 rounded-lg py-2 text-md justify-center font-bold"
+          role="alert"
+        >
+          <p>Failed to login. Try Again</p>
+        </div>
+      );
+      setMessage(alert);
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -18,17 +101,19 @@ export default function LoginModal() {
           Login
         </h2>
       </div>
-      <form className="mt-8 space-y-6" action="/" method="post">
+      {message && message}
+      <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
         <div className="-space-y-px">
           <div className="mb-4">
-            <label htmlFor="email-address" className="sr-only">
+            <label htmlFor="email" className="sr-only">
               Email address
             </label>
             <input
-              id="email-address"
+              id="email"
               name="email"
               type="email"
-              autoComplete="email"
+              value={email}
+              onChange={handleChange}
               className="appearance-none rounded-md shadow-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
               placeholder="Email"
             />
@@ -41,7 +126,8 @@ export default function LoginModal() {
               id="password"
               name="password"
               type="password"
-              autoComplete="current-password"
+              value={password}
+              onChange={handleChange}
               className="appearance-none rounded-md shadow-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
               placeholder="Password"
             />
@@ -49,14 +135,7 @@ export default function LoginModal() {
         </div>
 
         <div className="text-center">
-          <button
-            type="button"
-            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-brand-red focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            onClick={() => {
-              setLogin(!login);
-              setOpen(!open);
-            }}
-          >
+          <button className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-brand-red focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span className="absolute left-0 inset-y-0 flex items-center pl-3">
               <LockClosedIcon
                 className="h-5 w-5 text-red-500 group-hover:text-red-400"

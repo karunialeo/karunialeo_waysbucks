@@ -13,7 +13,7 @@ export default function ProductDesc({ item }) {
   }, []);
 
   function toggleAddTopping() {
-    if (!useTopping) {
+    if (useTopping == false) {
       setPrice(price + 4000);
       setUseTopping(true);
     } else {
@@ -45,18 +45,16 @@ export default function ProductDesc({ item }) {
             <h4 className="text-brand-red text-xl font-bold">Toping</h4>
             <div className="flex flex-wrap items-center text-center text-brand-red">
               {Toppings.map((item) => (
-                <>
-                  <button
-                    onClick={toggleAddTopping}
-                    type="button"
-                    className="w-1/2 lg:w-1/4 mt-10 flex flex-col items-center relative"
-                    key={item.toppingName}
-                  >
-                    <img src={item.image} alt="" className="hover:opacity-75" />
-                    <h4 className="mt-3 text-sm">{item.toppingName}</h4>
-                    {useTopping ? <CheckTopping /> : null}
-                  </button>
-                </>
+                <button
+                  onClick={() => toggleAddTopping()}
+                  type="button"
+                  className="w-1/2 lg:w-1/4 mt-10 flex flex-col items-center relative"
+                  key={item.index}
+                >
+                  <img src={item.image} alt="" className="hover:opacity-75" />
+                  <h4 className="mt-3 text-sm">{item.toppingName}</h4>
+                  {useTopping ? <CheckTopping /> : null}
+                </button>
               ))}
             </div>
           </div>

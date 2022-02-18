@@ -1,11 +1,101 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
+
+import { API } from "../../config/api";
 
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { LogoWhite } from "../../exports/exportImages";
 import { RegisteredContext } from "../../contexts/AuthContext";
+import { UserContext } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterModal() {
+  let navigate = useNavigate();
+
   const [registered, setRegistered] = useContext(RegisteredContext);
+
+  const [state, dispatch] = useContext(UserContext);
+
+  const [message, setMessage] = useState(null);
+  const [form, setForm] = useState({
+    fullname: "",
+    email: "",
+    password: "",
+  });
+
+  const { fullname, email, password } = form;
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      // Configuration Content-type
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      // Data body
+      const body = JSON.stringify(form);
+
+      // Insert data user to database
+      const response = await API.post("/register", body, config);
+
+      // Notification
+      if (response.data.status === "Success...") {
+        const alert = (
+          <div
+            class="flex items-center bg-green-600 text-white text-sm font-bold px-4 py-3"
+            role="alert"
+          >
+            <p>
+              Successfully registered. Please{" "}
+              <button
+                className="font-bold"
+                onClick={() => setRegistered(!registered)}
+              >
+                Login.
+              </button>
+            </p>
+          </div>
+        );
+        setMessage(alert);
+        setForm({
+          name: "",
+          email: "",
+          password: "",
+        });
+      } else {
+        const alert = (
+          <div
+            class="flex items-center bg-red-600 text-white text-sm font-bold px-4 py-3"
+            role="alert"
+          >
+            <p>Failed to register. Try Again</p>
+          </div>
+        );
+        setMessage(alert);
+      }
+    } catch (error) {
+      const alert = (
+        <div
+          class="flex items-center bg-red-600 text-white text-sm font-bold px-4 py-3"
+          role="alert"
+        >
+          <p>Failed to register. Try Again</p>
+        </div>
+      );
+      setMessage(alert);
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -15,32 +105,35 @@ export default function RegisterModal() {
           Register
         </h2>
       </div>
-      <form className="mt-8 space-y-6" action="/signin" method="POST">
+      {message && message}
+      <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
         <input type="hidden" name="remember" defaultValue="true" />
         <div className="-space-y-px">
           <div>
-            <label htmlFor="full-name" className="sr-only">
+            <label htmlFor="fullname" className="sr-only">
               Full Name
             </label>
             <input
-              id="email-address"
-              name="email"
-              type="email"
-              autoComplete="email"
+              id="fullname"
+              name="fullname"
+              type="text"
+              value={fullname}
+              onChange={handleChange}
               required
               className="appearance-none rounded-md shadow-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm mb-4"
               placeholder="Full Name"
             />
           </div>
           <div>
-            <label htmlFor="email-address" className="sr-only">
+            <label htmlFor="email" className="sr-only">
               Email address
             </label>
             <input
-              id="email-address"
+              id="email"
               name="email"
               type="email"
-              autoComplete="email"
+              value={email}
+              onChange={handleChange}
               required
               className="appearance-none rounded-md shadow-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm mb-4"
               placeholder="Email"
@@ -54,7 +147,8 @@ export default function RegisterModal() {
               id="password"
               name="password"
               type="password"
-              autoComplete="current-password"
+              value={password}
+              onChange={handleChange}
               required
               className="appearance-none rounded-md shadow-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
               placeholder="Password"
@@ -64,7 +158,7 @@ export default function RegisterModal() {
 
         <div className="text-center mt-4">
           <button
-            type="button"
+            type="submit"
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-brand-red focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             <span className="absolute left-0 inset-y-0 flex items-center pl-3">

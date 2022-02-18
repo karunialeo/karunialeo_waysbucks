@@ -1,6 +1,7 @@
 import { Fragment, useRef, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
+import { useNavigate } from "react-router-dom";
 
 import {
   AdminContext,
@@ -8,6 +9,7 @@ import {
   RegisteredContext,
 } from "../contexts/AuthContext";
 import { ModalContext } from "../contexts/ModalContext";
+import { UserContext } from "../contexts/UserContext";
 
 import {
   BasketIcon,
@@ -26,8 +28,19 @@ function Navbar() {
   const [login, setLogin] = useContext(LoginContext);
   const [admin, setAdmin] = useContext(AdminContext);
   const [registered, setRegistered] = useContext(RegisteredContext);
-
+  const [state, dispatch] = useContext(UserContext);
   const [open, setOpen] = useContext(ModalContext);
+
+  let navigate = useNavigate();
+
+  const logout = () => {
+    console.log(state);
+    setLogin(false);
+    dispatch({
+      type: "LOGOUT",
+    });
+    navigate("/auth");
+  };
 
   return (
     <nav className="mx-4 lg:mx-20 mt-4 flex justify-between items-center">
@@ -116,7 +129,7 @@ function Navbar() {
                     </>
                   )}
                   <hr />
-                  <Menu.Item onClick={() => setLogin(false)}>
+                  <Menu.Item onClick={logout}>
                     <div className="p-4 flex items-center hover:bg-gray-100 cursor-pointer">
                       <img src={LogoutIcon} className="w-5 mr-2" alt="logout" />
                       Logout

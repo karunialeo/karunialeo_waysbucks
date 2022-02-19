@@ -52,48 +52,50 @@ export default function RegisterModal() {
       if (response.data.status === "Success...") {
         const alert = (
           <div
-            class="flex items-center bg-green-600 text-white text-sm font-bold px-4 py-3"
+            className="flex items-center bg-green-600 rounded-md text-white text-sm px-4 py-3"
             role="alert"
           >
             <p>
-              Successfully registered. Please{" "}
+              Successfully registered. Click{" "}
               <button
                 className="font-bold"
                 onClick={() => setRegistered(!registered)}
               >
-                Login.
-              </button>
+                here
+              </button>{" "}
+              to login.
             </p>
           </div>
         );
         setMessage(alert);
         setForm({
-          name: "",
+          fullname: "",
           email: "",
           password: "",
         });
       } else {
         const alert = (
           <div
-            class="flex items-center bg-red-600 text-white text-sm font-bold px-4 py-3"
+            className="flex justify-center items-center bg-red-600 text-white text-sm font-bold px-4 py-3"
             role="alert"
           >
-            <p>Failed to register. Try Again</p>
+            <p>{response.message}</p>
           </div>
         );
+        console.log(response);
         setMessage(alert);
       }
     } catch (error) {
       const alert = (
         <div
-          class="flex items-center bg-red-600 text-white text-sm font-bold px-4 py-3"
+          className="flex justify-center items-center rounded-md text-red-600 border border-red-600 text-sm font-bold px-4 py-3"
           role="alert"
         >
-          <p>Failed to register. Try Again</p>
+          <p>Register Failed. Try Again</p>
         </div>
       );
-      setMessage(alert);
       console.log(error);
+      setMessage(alert);
     }
   };
 

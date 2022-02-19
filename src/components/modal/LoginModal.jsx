@@ -64,12 +64,13 @@ export default function LoginModal() {
 
         setOpen(false);
         // Status check
-        if (response.data.data.status === "admin") {
+        if (response.data.data.user.status === "admin") {
           navigate("/");
           setAdmin(true);
         } else {
           navigate("/");
           setAdmin(false);
+          // console.log(response);
         }
 
         // const alert = (

@@ -7,8 +7,8 @@ export default function TransactionCard() {
   return (
     <>
       <div className="w-full lg:w-8/12 space-y-4 mb-4 lg:mb-0">
-        {Transactions.map((item) => (
-          <div className="flex">
+        {Transactions.map((item, index) => (
+          <div className="flex" key={index}>
             <img src={item.image} alt="product" className="w-3/12" />
             <div className="text-brand-red font-['Avenir-Book'] space-y-4 ml-2">
               <h4 className="text-md font-['Avenir-Black'] font-bold">

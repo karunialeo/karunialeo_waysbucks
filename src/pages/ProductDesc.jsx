@@ -1,15 +1,45 @@
 import { useState, useEffect } from "react";
 import { IceCoffeePalmSugar } from "../exports/exportImages";
-import Toppings from "../tempDatabase/Toppings";
-import thousandSeparator from "../utils/thousandSeparator";
 import { globalTitle } from "../components/App";
+import { API } from "../config/api";
+import { useParams } from "react-router-dom";
+import formatThousands from "format-thousands";
 
 export default function ProductDesc({ item }) {
+  let { id } = useParams();
+
   const [price, setPrice] = useState(27000);
+  const [product, setProduct] = useState({});
+  const [toppings, setToppings] = useState([]);
   const [useTopping, setUseTopping] = useState(false);
 
   useEffect(() => {
     document.title = globalTitle + "Product";
+  }, []);
+
+  const getProduct = async (id) => {
+    try {
+      const response = await API.get("/product/" + id);
+      // Store product data to useState variabel
+      setProduct(response.data.data.product);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getToppings = async () => {
+    try {
+      const response = await API.get("/toppings");
+      // Store product data to useState variabel
+      setToppings(response.data.data.toppings);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getToppings();
+    getProduct(id);
   }, []);
 
   function toggleAddTopping() {
@@ -27,7 +57,7 @@ export default function ProductDesc({ item }) {
       <div className="mx-8 lg:pt-10 pb-20 lg:mx-32 lg:flex">
         <div className="img my-8 lg:my-0 w-full lg:w-5/12">
           <img
-            src={IceCoffeePalmSugar}
+            src={"http://localhost:5000/uploads/" + product.image}
             alt="product"
             className="w-full lg:w-96"
           />
@@ -35,24 +65,24 @@ export default function ProductDesc({ item }) {
         <div className="text w-full lg:w-7/12">
           <div className="mb-10 lg:mb-14">
             <h1 className="text-brand-red text-5xl font-extrabold font-['Avenir-Black'] mb-4">
-              Ice Coffee Palm Sugar
+              {product.title}
             </h1>
             <p className="text-brand-red text-xl">
-              Rp {thousandSeparator(price)},-
+              Rp {formatThousands(product.price, ".")},-
             </p>
           </div>
           <div className="mb-10 lg:mb-14">
             <h4 className="text-brand-red text-xl font-bold">Toping</h4>
             <div className="flex flex-wrap items-center text-center text-brand-red">
-              {Toppings.map((item) => (
+              {toppings.map((item, index) => (
                 <button
                   onClick={() => toggleAddTopping()}
                   type="button"
                   className="w-1/2 lg:w-1/4 mt-10 flex flex-col items-center relative"
-                  key={item.index}
+                  key={index}
                 >
                   <img src={item.image} alt="" className="hover:opacity-75" />
-                  <h4 className="mt-3 text-sm">{item.toppingName}</h4>
+                  <h4 className="mt-3 text-sm">{item.title}</h4>
                   {useTopping ? <CheckTopping /> : null}
                 </button>
               ))}
@@ -60,7 +90,7 @@ export default function ProductDesc({ item }) {
           </div>
           <div className="mb-10 lg:mb-10 flex justify-between text-xl font-bold text-brand-red">
             <span>Total</span>
-            <span>Rp {thousandSeparator(price)},-</span>
+            <span>Rp {formatThousands(price, ".")},-</span>
           </div>
           <button className="w-full bg-red-600 text-white py-2 rounded-md hover:bg-brand-red">
             Add Cart

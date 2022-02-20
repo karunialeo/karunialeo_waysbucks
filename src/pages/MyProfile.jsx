@@ -1,9 +1,29 @@
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { globalTitle } from "../components/App";
 import { UserImg } from "../exports/exportImages";
 import TransactionCard from "../components/TransactionCard";
+import { API } from "../config/api";
+import { UserContext } from "../contexts/UserContext";
 
 export default function MyProfile() {
+  const [user, setUser] = useState({});
+  const [state, dispatch] = useContext(UserContext);
+
+  const id = state.user.id;
+
+  const getUser = async (id) => {
+    try {
+      const response = await API.get("/user/" + id);
+      setUser(response.data.data.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getUser(id);
+  }, []);
+
   useEffect(() => {
     document.title = globalTitle + "My Profile";
   }, []);
@@ -20,9 +40,9 @@ export default function MyProfile() {
           </div>
           <div className="space-y-4">
             <p className="text-yellow-700 font-bold">Full Name</p>
-            <p>Karunia Leo Gultom</p>
+            <p>{user.fullname}</p>
             <p className="text-yellow-700 font-bold">Email</p>
-            <p>karunia@mail.com</p>
+            <p>{user.email}</p>
           </div>
         </div>
       </div>

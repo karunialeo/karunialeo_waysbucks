@@ -39,7 +39,7 @@ function Navbar() {
     dispatch({
       type: "LOGOUT",
     });
-    navigate("/auth");
+    navigate("/");
   };
 
   return (

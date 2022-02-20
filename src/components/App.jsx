@@ -5,8 +5,8 @@ import { API, setAuthToken } from "../config/api";
 
 import { Routes, Route, useNavigate } from "react-router-dom";
 
-import CustomerRoute from "./auth/CustomerRoute";
-import AdminRoute from "./auth/AdminRoute";
+import CustomerRoute from "./privateRoute/CustomerRoute";
+import AdminRoute from "./privateRoute/AdminRoute";
 
 import {
   RegisteredProvider,
@@ -43,8 +43,7 @@ export default function App() {
   const [state, dispatch] = useContext(UserContext);
   const [admin, setAdmin] = useContext(AdminContext);
   const [login, setLogin] = useContext(LoginContext);
-  console.clear();
-  console.log(state);
+  // console.clear();
 
   useEffect(() => {
     if (localStorage.token) {

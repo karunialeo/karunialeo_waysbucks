@@ -59,7 +59,7 @@ export default function LoginModal() {
         // Send data to useContext
         dispatch({
           type: "LOGIN_SUCCESS",
-          payload: response.data.data,
+          payload: response.data.data.user,
         });
 
         setOpen(false);
@@ -67,10 +67,10 @@ export default function LoginModal() {
         if (response.data.data.user.status === "admin") {
           navigate("/");
           setAdmin(true);
+          console.log(response);
         } else {
           navigate("/");
           setAdmin(false);
-          // console.log(response);
         }
 
         // const alert = (

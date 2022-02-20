@@ -1,23 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
-import Products from "../tempDatabase/Products";
 import thousandSeparator from "../utils/thousandSeparator";
+import { API } from "../config/api";
 
 function Menu() {
+  const [products, setProducts] = useState([]);
+
+  const getProducts = async () => {
+    try {
+      const response = await API.get("/products");
+      // Store product data to useState variabel
+      setProducts(response.data.data.products);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <div className="mx-4 lg:mx-32 my-2 lg:my-10 relative">
       <h1 className="text-5xl mb-10 lg:mb-10 text-brand-red font-extrabold font-['Avenir-Black']">
         Let&#39;s Order
       </h1>
       <div className="product-list flex flex-wrap justify-center lg:justify-between mb-20">
-        {Products.map((item) => (
-          <Link to={`/product/${item.productIndex}`}>
+        {products.map((item, index) => (
+          <Link to={`/product/${item.id}`} key={index}>
             <ProductCard
-              name={item.productName}
+              name={item.title}
               image={item.image}
               price={thousandSeparator(item.price)}
-              key={item.productIndex}
+              key={item.id}
             />
           </Link>
         ))}

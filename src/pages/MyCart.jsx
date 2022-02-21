@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Transactions from "../tempDatabase/Transactions";
 import thousandSeparator from "../utils/thousandSeparator";
 import PaymentForm from "../components/PaymentForm";
+import { InvoiceIcon } from "../exports/exportImages";
 
 function MyCart() {
   useEffect(() => {
@@ -98,7 +99,7 @@ function MyCart() {
               </div>
             </div>
             <button className="bg-pink-100 w-5/12 lg:w-4/12 border-2 border-brand-red rounded-lg flex flex-col items-center justify-center gap-y-4">
-              <img src="/img/invoices.png" alt="invoices" />
+              <img src={InvoiceIcon} alt="invoices" />
               <p className="text-gray-500">Attach of Transaction</p>
             </button>
           </div>

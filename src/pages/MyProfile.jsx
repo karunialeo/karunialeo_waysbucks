@@ -4,28 +4,27 @@ import { UserImg } from "../exports/exportImages";
 import TransactionCard from "../components/TransactionCard";
 import { API } from "../config/api";
 import { UserContext } from "../contexts/UserContext";
+import { useParams } from "react-router-dom";
 
 export default function MyProfile() {
+  // const { id } = useParams();
   const [user, setUser] = useState({});
   const [state, dispatch] = useContext(UserContext);
 
-  const id = state.user.id;
-
-  const getUser = async (id) => {
+  const getUser = async () => {
     try {
-      const response = await API.get("/user/" + id);
+      const response = await API.get("/user/" + state.user.id);
       setUser(response.data.data.user);
+      console.log(response.data.data.user);
+      console.log(state);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getUser(id);
-  }, []);
-
-  useEffect(() => {
     document.title = globalTitle + "My Profile";
+    getUser();
   }, []);
 
   return (

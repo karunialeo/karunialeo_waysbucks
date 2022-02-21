@@ -105,7 +105,7 @@ export default function AddProduct() {
             type="text"
             name="title"
             onChange={handleChange}
-            placeholder="Name Product"
+            placeholder="Product Name"
             className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
           />
           <input

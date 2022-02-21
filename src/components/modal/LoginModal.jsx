@@ -72,13 +72,6 @@ export default function LoginModal() {
           navigate("/");
           setAdmin(false);
         }
-
-        // const alert = (
-        //   <Alert variant="success" className="py-1">
-        //     Login success
-        //   </Alert>
-        // );
-        // setMessage(alert);
       }
     } catch (error) {
       const alert = (

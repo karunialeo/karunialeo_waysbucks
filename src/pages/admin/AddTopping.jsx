@@ -105,14 +105,14 @@ export default function AddTopping() {
             type="text"
             name="title"
             onChange={handleChange}
-            placeholder="Name Product"
+            placeholder="Topping Name"
             className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
           />
           <input
             type="text"
             name="price"
             onChange={handleChange}
-            placeholder="Price"
+            placeholder="Price (Rp.)"
             className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
           />
           <label

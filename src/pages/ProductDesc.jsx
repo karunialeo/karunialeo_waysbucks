@@ -59,7 +59,7 @@ export default function ProductDesc({ item }) {
           <img
             src={"http://localhost:5000/uploads/" + product.image}
             alt="product"
-            className="w-full lg:w-96"
+            className="w-full lg:w-96 rounded-2xl"
           />
         </div>
         <div className="text w-full lg:w-7/12">

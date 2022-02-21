@@ -79,6 +79,7 @@ export default function App() {
 
       // Get user data
       let payload = response.data.data.user;
+      console.log(payload);
       // Get token from local storage
       payload.token = localStorage.token;
 
@@ -117,7 +118,7 @@ export default function App() {
               </CartModalProvider>
             }
           />
-          <Route path="/profile" element={<MyProfile />} />
+          <Route path="/profile/:fullname" element={<MyProfile />} />
         </Route>
 
         <Route exact path="/" element={<AdminRoute />}>

@@ -2,6 +2,7 @@ import { Fragment, useRef, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
+import urlSlug from "url-slug";
 
 import {
   AdminContext,
@@ -30,6 +31,8 @@ function Navbar() {
   const [registered, setRegistered] = useContext(RegisteredContext);
   const [state, dispatch] = useContext(UserContext);
   const [open, setOpen] = useContext(ModalContext);
+
+  console.log(state);
 
   let navigate = useNavigate();
 
@@ -115,7 +118,7 @@ function Navbar() {
                     <>
                       <Menu.Item>
                         <Link
-                          to="/profile"
+                          to={"/profile/" + urlSlug(state.user.fullname)}
                           className="p-4 flex items-center hover:bg-gray-100"
                         >
                           <img

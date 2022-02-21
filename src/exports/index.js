@@ -7,6 +7,8 @@ import RegisterModal from "../components/modal/RegisterModal";
 
 import Modal from "../components/modal";
 
+import CheckList from "../components/CheckList";
+
 export {
   Navbar,
   Jumbotron,
@@ -14,4 +16,5 @@ export {
   Modal,
   LoginModal,
   RegisterModal,
+  CheckList,
 };

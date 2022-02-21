@@ -73,16 +73,15 @@ export default function RegisterModal() {
           email: "",
           password: "",
         });
-      } else {
+      } else if (response?.status === 400) {
         const alert = (
           <div
-            className="flex justify-center items-center bg-red-600 text-white text-sm font-bold px-4 py-3"
+            className="flex justify-center items-center rounded-md text-blue-600 border border-blue-600 text-sm font-bold px-4 py-3"
             role="alert"
           >
             <p>{response.message}</p>
           </div>
         );
-        console.log(response);
         setMessage(alert);
       }
     } catch (error) {

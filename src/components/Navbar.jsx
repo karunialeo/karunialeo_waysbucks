@@ -32,12 +32,9 @@ function Navbar() {
   const [state, dispatch] = useContext(UserContext);
   const [open, setOpen] = useContext(ModalContext);
 
-  console.log(state);
-
   let navigate = useNavigate();
 
   const logout = () => {
-    console.log(state);
     setLogin(false);
     dispatch({
       type: "LOGOUT",

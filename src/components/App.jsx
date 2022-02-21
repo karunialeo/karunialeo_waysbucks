@@ -79,7 +79,6 @@ export default function App() {
 
       // Get user data
       let payload = response.data.data.user;
-      console.log(payload);
       // Get token from local storage
       payload.token = localStorage.token;
 

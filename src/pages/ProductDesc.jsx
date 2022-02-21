@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
-import { IceCoffeePalmSugar } from "../exports/exportImages";
 import { globalTitle } from "../components/App";
 import { API } from "../config/api";
 import { useParams } from "react-router-dom";
 import formatThousands from "format-thousands";
+import { CheckList } from "../exports";
 
 export default function ProductDesc({ item }) {
   let { id } = useParams();
 
-  const [price, setPrice] = useState(27000);
   const [product, setProduct] = useState({});
   const [toppings, setToppings] = useState([]);
-  const [useTopping, setUseTopping] = useState(false);
 
   useEffect(() => {
     document.title = globalTitle + "Product";
@@ -37,20 +35,18 @@ export default function ProductDesc({ item }) {
     }
   };
 
+  const handleClick = () => {
+    const checkedTopping = toppings.filter(
+      (topping) => topping.checked == true
+    );
+
+    console.log(checkedTopping);
+  };
+
   useEffect(() => {
     getToppings();
     getProduct(id);
   }, []);
-
-  function toggleAddTopping() {
-    if (useTopping == false) {
-      setPrice(price + 4000);
-      setUseTopping(true);
-    } else {
-      setPrice(price - 4000);
-      setUseTopping(false);
-    }
-  }
 
   return (
     <>
@@ -63,7 +59,7 @@ export default function ProductDesc({ item }) {
           />
         </div>
         <div className="text w-full lg:w-7/12">
-          <div className="mb-10 lg:mb-14">
+          <div className="mb-10">
             <h1 className="text-brand-red text-5xl font-extrabold font-['Avenir-Black'] mb-4">
               {product.title}
             </h1>
@@ -72,54 +68,35 @@ export default function ProductDesc({ item }) {
             </p>
           </div>
           <div className="mb-10 lg:mb-14">
-            <h4 className="text-brand-red text-xl font-bold">Toping</h4>
-            <div className="flex flex-wrap items-center text-center text-brand-red">
-              {toppings.map((item, index) => (
-                <button
-                  onClick={() => toggleAddTopping()}
-                  type="button"
-                  className="w-1/2 lg:w-1/4 mt-10 flex flex-col items-center relative"
-                  key={index}
+            <h4 className="text-brand-red text-xl font-bold">Topping</h4>
+            <div className="flex flex-wrap items-center my-10 text-center text-brand-red">
+              {toppings.map((item) => (
+                <div
+                  key={item.id}
+                  className="mb-4 w-1/4 flex justify-center relative"
                 >
-                  <img src={item.image} alt="" className="hover:opacity-75" />
-                  <h4 className="mt-3 text-sm">{item.title}</h4>
-                  {useTopping ? <CheckTopping /> : null}
-                </button>
+                  <CheckList
+                    title={item.title}
+                    price={item.price}
+                    image={item.image}
+                    id={item.id}
+                  />
+                </div>
               ))}
             </div>
           </div>
           <div className="mb-10 lg:mb-10 flex justify-between text-xl font-bold text-brand-red">
             <span>Total</span>
-            <span>Rp {formatThousands(price, ".")},-</span>
+            <span>Rp {formatThousands(product.price, ".")},-</span>
           </div>
-          <button className="w-full bg-red-600 text-white py-2 rounded-md hover:bg-brand-red">
-            Add Cart
+          <button
+            onClick={handleClick}
+            className="w-full bg-red-600 text-white py-2 rounded-md hover:bg-brand-red"
+          >
+            Add To Cart
           </button>
         </div>
       </div>
     </>
-  );
-}
-
-function CheckTopping() {
-  return (
-    <div className="absolute right-8 bottom-8">
-      <div className="bg-green-600 text-white text-xs rounded-full">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M5 13l4 4L19 7"
-          />
-        </svg>
-      </div>
-    </div>
   );
 }

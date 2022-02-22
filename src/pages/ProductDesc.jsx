@@ -37,7 +37,7 @@ export default function ProductDesc({ item }) {
 
   const handleClick = () => {
     const checkedTopping = toppings.filter(
-      (topping) => topping.checked == true
+      (topping) => topping.checked === true
     );
 
     console.log(checkedTopping);
@@ -46,6 +46,10 @@ export default function ProductDesc({ item }) {
   useEffect(() => {
     getToppings();
     getProduct(id);
+    return () => {
+      setProduct({});
+      setToppings({});
+    };
   }, []);
 
   return (

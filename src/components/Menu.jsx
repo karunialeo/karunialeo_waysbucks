@@ -26,7 +26,7 @@ function Menu() {
       <h1 className="text-5xl mb-10 lg:mb-10 text-brand-red font-extrabold font-['Avenir-Black']">
         Let&#39;s Order
       </h1>
-      <div className="product-list flex flex-wrap justify-center lg:justify-between mb-20">
+      <div className="product-list flex flex-wrap justify-center lg:justify-start mb-20">
         {products.map((item, index) => (
           <Link to={`/product/${item.id}`} key={index}>
             <ProductCard

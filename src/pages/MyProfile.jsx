@@ -7,7 +7,6 @@ import { UserContext } from "../contexts/UserContext";
 import { useParams } from "react-router-dom";
 
 export default function MyProfile() {
-  // const { id } = useParams();
   const [user, setUser] = useState({});
   const [state, dispatch] = useContext(UserContext);
 
@@ -15,8 +14,6 @@ export default function MyProfile() {
     try {
       const response = await API.get("/user/" + state.user.id);
       setUser(response.data.data.user);
-      console.log(response.data.data.user);
-      console.log(state);
     } catch (error) {
       console.log(error);
     }

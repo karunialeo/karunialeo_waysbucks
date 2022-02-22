@@ -4,11 +4,7 @@ import { API } from "../../config/api";
 
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { LogoWhite } from "../../exports/exportImages";
-import {
-  AdminContext,
-  LoginContext,
-  RegisteredContext,
-} from "../../contexts/AuthContext";
+import { AdminContext, RegisteredContext } from "../../contexts/AuthContext";
 import { ModalContext } from "../../contexts/ModalContext";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
@@ -17,7 +13,6 @@ export default function LoginModal() {
   let navigate = useNavigate();
 
   const [registered, setRegistered] = useContext(RegisteredContext);
-  const [login, setLogin] = useContext(LoginContext);
   const [admin, setAdmin] = useContext(AdminContext);
   const [open, setOpen] = useContext(ModalContext);
   const [state, dispatch] = useContext(UserContext);

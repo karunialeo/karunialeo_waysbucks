@@ -6,12 +6,6 @@ export default function CheckList({ title, price, image, id }) {
   const [toppings, setToppings] = useState([]);
   const [checked, setChecked] = useState(false);
 
-  const handleChecked = () => {
-    setChecked(!checked);
-
-    toppings.find((item) => item.id === id).checked = !checked;
-  };
-
   const getToppings = async () => {
     try {
       const response = await API.get("/toppings");
@@ -25,6 +19,13 @@ export default function CheckList({ title, price, image, id }) {
   useEffect(() => {
     getToppings();
   }, []);
+
+  const handleChecked = () => {
+    setChecked(!checked);
+
+    toppings.find((item) => item.id === id).checked = !checked;
+    // console.log(id);
+  };
 
   return (
     <>

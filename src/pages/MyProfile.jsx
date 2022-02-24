@@ -4,12 +4,14 @@ import { UserImg } from "../exports/exportImages";
 import TransactionCard from "../components/TransactionCard";
 import { API } from "../config/api";
 import { UserContext } from "../contexts/UserContext";
-import { LoginContext } from "../contexts/AuthContext";
+import { OrderContext } from "../contexts/OrderContext";
+import { Link } from "react-router-dom";
 
 export default function MyProfile() {
   const [user, setUser] = useState({});
 
   const [state, dispatch] = useContext(UserContext);
+  const [order, setOrder] = useContext(OrderContext);
 
   const getUser = async () => {
     try {
@@ -48,9 +50,18 @@ export default function MyProfile() {
           <h3 className="text-3xl font-['Avenir-Black'] font-extrabold text-brand-red">
             My Transaction
           </h3>
-          <div className="lg:flex justify-between my-8 bg-brand-pink rounded-lg p-4">
-            <TransactionCard />
-          </div>
+          {order.length > 0 ? (
+            <div className="lg:flex justify-between my-8 bg-brand-pink rounded-lg p-4">
+              <TransactionCard />
+            </div>
+          ) : (
+            <div className="py-5 text-brand-red">
+              <p className="text-lg mb-4">Cart is Empty.</p>
+              <Link to="/" className="hover:underline">
+                Continue shopping.
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

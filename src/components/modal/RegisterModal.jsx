@@ -5,15 +5,9 @@ import { API } from "../../config/api";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { LogoWhite } from "../../exports/exportImages";
 import { RegisteredContext } from "../../contexts/AuthContext";
-import { UserContext } from "../../contexts/UserContext";
-import { useNavigate } from "react-router-dom";
 
 export default function RegisterModal() {
-  let navigate = useNavigate();
-
   const [registered, setRegistered] = useContext(RegisteredContext);
-
-  const [state, dispatch] = useContext(UserContext);
 
   const [message, setMessage] = useState(null);
   const [form, setForm] = useState({

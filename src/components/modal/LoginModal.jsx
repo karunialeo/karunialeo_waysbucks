@@ -62,7 +62,6 @@ export default function LoginModal() {
         if (response.data.data.user.status === "admin") {
           navigate("/");
           setAdmin(true);
-          console.log(response);
         } else {
           navigate("/");
           setAdmin(false);

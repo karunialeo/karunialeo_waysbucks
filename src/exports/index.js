@@ -9,6 +9,8 @@ import Modal from "../components/modal";
 
 import CheckList from "../components/CheckList";
 
+export const uploads = "http://localhost:5000/uploads/";
+
 export {
   Navbar,
   Jumbotron,

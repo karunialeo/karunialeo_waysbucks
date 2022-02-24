@@ -3,13 +3,14 @@ import { globalTitle } from "../components/App";
 import { API } from "../config/api";
 import { useParams } from "react-router-dom";
 import formatThousands from "format-thousands";
-import { CheckList } from "../exports";
+import { CheckList, uploads } from "../exports";
 
 export default function ProductDesc({ item }) {
   let { id } = useParams();
 
   const [product, setProduct] = useState({});
   const [toppings, setToppings] = useState([]);
+  const [useTopping, setUseTopping] = useState(false);
 
   useEffect(() => {
     document.title = globalTitle + "Product";
@@ -57,7 +58,7 @@ export default function ProductDesc({ item }) {
       <div className="mx-8 lg:pt-10 pb-20 lg:mx-32 lg:flex">
         <div className="img my-8 lg:my-0 w-full lg:w-5/12">
           <img
-            src={"http://localhost:5000/uploads/" + product.image}
+            src={uploads + product.image}
             alt="product"
             className="w-full lg:w-96 rounded-2xl"
           />

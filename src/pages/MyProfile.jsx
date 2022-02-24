@@ -4,10 +4,11 @@ import { UserImg } from "../exports/exportImages";
 import TransactionCard from "../components/TransactionCard";
 import { API } from "../config/api";
 import { UserContext } from "../contexts/UserContext";
-import { useParams } from "react-router-dom";
+import { LoginContext } from "../contexts/AuthContext";
 
 export default function MyProfile() {
   const [user, setUser] = useState({});
+
   const [state, dispatch] = useContext(UserContext);
 
   const getUser = async () => {

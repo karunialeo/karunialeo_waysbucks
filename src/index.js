@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./components/App";
 import { AlertProvider, LoginProvider, AdminProvider } from "./contexts/AuthContext";
 import { UserProvider } from "./contexts/UserContext";
+import { OrderProvider } from './contexts/OrderContext';
 
 
 ReactDOM.render(
@@ -13,9 +14,11 @@ ReactDOM.render(
       <AdminProvider>
         <LoginProvider>
           <AlertProvider>
-            <Router>
-              <App />
-            </Router>
+            <OrderProvider>
+              <Router>
+                <App />
+              </Router>
+            </OrderProvider>
           </AlertProvider>
         </LoginProvider>
       </AdminProvider>

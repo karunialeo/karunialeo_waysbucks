@@ -12,24 +12,24 @@ export default function CheckList({ title, price, image, id }) {
     toppings.find((item) => item.id === id).checked = !checked;
   };
 
-  const getToppings = async () => {
-    try {
-      const response = await API.get("/toppings");
-      // Store product data to useState variabel
-      setToppings(response.data.data.toppings);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getToppings = async () => {
+  //   try {
+  //     const response = await API.get("/toppings");
+  //     // Store product data to useState variabel
+  //     setToppings(response.data.data.toppings);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    getToppings();
-  }, []);
+  // useEffect(() => {
+  //   getToppings();
+  // }, []);
 
   return (
     <>
       <button onClick={handleChecked} className="flex flex-col items-center">
-        <img src={image} alt="" className="w-16" />
+        <img src={image} alt="" className="w-16 hover:opacity-75" />
         <h4 className="text-sm mt-3">{title}</h4>
         <p className="text-xs mt-2">Rp {formatThousands(price, ".")},-</p>
       </button>

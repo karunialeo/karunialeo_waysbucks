@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState, useContext } from "react";
+import { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ import {
   UserImg,
 } from "../exports/exportImages";
 
-import Transactions from "../tempDatabase/Transactions";
+import { OrderContext } from "../contexts/OrderContext";
 
 function Navbar() {
   const [login, setLogin] = useContext(LoginContext);
@@ -31,6 +31,7 @@ function Navbar() {
   const [registered, setRegistered] = useContext(RegisteredContext);
   const [state, dispatch] = useContext(UserContext);
   const [open, setOpen] = useContext(ModalContext);
+  const [order, setOrder] = useContext(OrderContext);
 
   let navigate = useNavigate();
 
@@ -55,9 +56,9 @@ function Navbar() {
               className="relative"
             >
               <img src={BasketIcon} alt="shopping-basket" />
-              {admin ? null : Transactions.length > 0 ? (
+              {admin ? null : order.length > 0 ? (
                 <div className="w-5 h-5 text-xs text-white font-bold bg-red-600 rounded-full absolute -right-2 -top-1 flex justify-center items-center">
-                  {Transactions.length}
+                  {order.length}
                 </div>
               ) : null}
             </Link>

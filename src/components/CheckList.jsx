@@ -12,19 +12,19 @@ export default function CheckList({ title, price, image, id }) {
     toppings.find((item) => item.id === id).checked = !checked;
   };
 
-  // const getToppings = async () => {
-  //   try {
-  //     const response = await API.get("/toppings");
-  //     // Store product data to useState variabel
-  //     setToppings(response.data.data.toppings);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const getToppings = async () => {
+    try {
+      const response = await API.get("/toppings");
+      // Store product data to useState variabel
+      setToppings(response.data.data.toppings);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // useEffect(() => {
-  //   getToppings();
-  // }, []);
+  useEffect(() => {
+    getToppings();
+  }, []);
 
   return (
     <>

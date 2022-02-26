@@ -1,5 +1,4 @@
 import React from "react";
-import { LogoBlack, LogoWhite } from "../exports/exportImages";
 
 function ProductCard(props) {
   return (

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { globalTitle } from "../../components/App";
-import { Mango, UploadIcon } from "../../exports/exportImages";
+import { UploadIcon } from "../../exports/exportImages";
 import { API } from "../../config/api";
 
 export default function AddTopping() {

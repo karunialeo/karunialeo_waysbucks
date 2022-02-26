@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import { globalTitle } from "../components/App";
 import { Link } from "react-router-dom";
-import thousandSeparator from "../utils/thousandSeparator";
 import PaymentForm from "../components/PaymentForm";
 import { InvoiceIcon } from "../exports/exportImages";
 import { uploads } from "../exports";
@@ -13,7 +12,7 @@ import { UserContext } from "../contexts/UserContext";
 
 function MyCart() {
   const [order, setOrder] = useContext(OrderContext);
-  const [state, dispatch] = useContext(UserContext)
+  const [state, dispatch] = useContext(UserContext);
 
   const getOrders = async () => {
     try {
@@ -94,10 +93,11 @@ function MyCart() {
                       <span>
                         Rp{" "}
                         {order.length > 0
-                          ? thousandSeparator(
+                          ? formatThousands(
                               order
                                 .map((item) => item.price)
-                                .reduce((prev, next) => prev + next)
+                                .reduce((prev, next) => prev + next),
+                              "."
                             )
                           : 0}
                         ,-
@@ -114,10 +114,11 @@ function MyCart() {
                     <span>
                       Rp{" "}
                       {order.length > 0
-                        ? thousandSeparator(
+                        ? formatThousands(
                             order
                               .map((item) => item.price)
-                              .reduce((prev, next) => prev + next)
+                              .reduce((prev, next) => prev + next),
+                            "."
                           )
                         : 0}
                       ,-

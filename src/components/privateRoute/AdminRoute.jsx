@@ -1,11 +1,7 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 
-import {
-  LoginContext,
-  AdminContext,
-  // AlertContext,
-} from "../../contexts/AuthContext";
+import { LoginContext, AdminContext } from "../../contexts/AuthContext";
 
 const AdminRoute = ({ element: Component, ...rest }) => {
   const [login, setLogin] = useContext(LoginContext);

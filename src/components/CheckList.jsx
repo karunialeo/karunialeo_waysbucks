@@ -16,6 +16,11 @@ export default function CheckList({ title, price, image, id }) {
     }
   };
 
+  let dataToppings = toppings.map((item) => ({
+    ...item,
+    checked: checked,
+  }));
+
   useEffect(() => {
     getToppings();
   }, []);
@@ -23,16 +28,18 @@ export default function CheckList({ title, price, image, id }) {
   const handleChecked = () => {
     setChecked(!checked);
 
-    toppings.find((item) => item.id === id).checked = !checked;
-    // console.log(id);
+    dataToppings.find((item) => item.id === id).checked = !checked;
+    console.log(dataToppings.filter((item) => item.checked === true));
   };
 
   return (
-    <>
+    <div key={id} className="mb-4 w-1/4 flex justify-center relative">
       <button onClick={handleChecked} className="flex flex-col items-center">
         <img src={image} alt="" className="w-16 hover:opacity-75" />
         <h4 className="text-sm mt-3">{title}</h4>
-        <p className="text-xs mt-2">Rp {formatThousands(price, ".")},-</p>
+        <p className="text-xs mt-2 font-semibold">
+          Rp {formatThousands(price, ".")},-
+        </p>
       </button>
       {checked && (
         <div className="bg-green-600 text-white text-xs rounded-full absolute right-10 top-14">
@@ -52,6 +59,6 @@ export default function CheckList({ title, price, image, id }) {
           </svg>
         </div>
       )}
-    </>
+    </div>
   );
 }

@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { globalTitle } from "../../components/App";
 
-import thousandSeparator from "../../utils/thousandSeparator";
+import formatThousands from "format-thousands";
 import Customers from "../../tempDatabase/Customers";
 import TransactionModal from "../../components/modal/TransactionModal";
 import { TransactionModalContext } from "../../contexts/ModalContext";
@@ -127,7 +127,7 @@ export default function TransactionsTable() {
                   </td>
                   <td className="px-4 py-2 whitespace-nowrap">
                     <button onClick={() => setOpen(!open)}>
-                      Rp {thousandSeparator(customer.income)},-
+                      Rp {formatThousands(customer.income, ".")},-
                     </button>
                   </td>
                   <td

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
-import thousandSeparator from "../utils/thousandSeparator";
+import formatThousands from "format-thousands";
 import { API } from "../config/api";
 
 function Menu() {
@@ -32,7 +32,7 @@ function Menu() {
             <ProductCard
               name={item.title}
               image={item.image}
-              price={thousandSeparator(item.price)}
+              price={formatThousands(item.price, ".")}
               key={item.id}
             />
           </Link>

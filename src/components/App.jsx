@@ -25,6 +25,7 @@ import {
   ProductDesc,
   MyProfile,
   MyCart,
+  EditProfile,
   AddProduct,
   AddTopping,
   TransactionsTable,
@@ -49,7 +50,6 @@ export default function App() {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
-
     // Redirect Auth
     if (!state.isLogin) {
       setLogin(false);
@@ -105,7 +105,18 @@ export default function App() {
         </RegisteredProvider>
       </ModalProvider>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/"
+          element={
+            admin && login ? (
+              <TransactionModalProvider>
+                <TransactionsTable />
+              </TransactionModalProvider>
+            ) : (
+              <LandingPage />
+            )
+          }
+        />
         <Route path="/product/:id" element={<ProductDesc />} />
 
         <Route exact path="/" element={<CustomerRoute />}>
@@ -118,19 +129,20 @@ export default function App() {
             }
           />
           <Route path="/profile/:fullname" element={<MyProfile />} />
+          <Route path="/profile/edit" element={<EditProfile />} />
         </Route>
 
         <Route exact path="/" element={<AdminRoute />}>
           <Route path="/add-product" element={<AddProduct />} />
           <Route path="/add-topping" element={<AddTopping />} />
-          <Route
+          {/* <Route
             path="/transactions"
             element={
               <TransactionModalProvider>
                 <TransactionsTable />
               </TransactionModalProvider>
             }
-          />
+          /> */}
         </Route>
       </Routes>
     </>

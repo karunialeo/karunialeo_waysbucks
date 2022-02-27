@@ -6,6 +6,7 @@ import App from "./components/App";
 import { AlertProvider, LoginProvider, AdminProvider } from "./contexts/AuthContext";
 import { UserProvider } from "./contexts/UserContext";
 import { OrderProvider } from './contexts/OrderContext';
+import { ProfileProvider } from "./contexts/ProfileContext";
 
 
 ReactDOM.render(
@@ -13,13 +14,15 @@ ReactDOM.render(
     <UserProvider>
       <AdminProvider>
         <LoginProvider>
-          <AlertProvider>
-            <OrderProvider>
-              <Router>
-                <App />
-              </Router>
-            </OrderProvider>
-          </AlertProvider>
+          <ProfileProvider>
+            <AlertProvider>
+              <OrderProvider>
+                  <Router>
+                    <App />
+                  </Router>
+              </OrderProvider>
+            </AlertProvider>
+          </ProfileProvider>
         </LoginProvider>
       </AdminProvider>
     </UserProvider>

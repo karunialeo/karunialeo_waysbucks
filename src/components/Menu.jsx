@@ -28,7 +28,7 @@ function Menu() {
       </h1>
       <div className="product-list flex flex-wrap justify-center lg:justify-start mb-20">
         {products.map((item, index) => (
-          <Link to={`/product/${item.id}`} key={index}>
+          <Link to={`/product/${item.id}`} key={index} className="lg:mr-4">
             <ProductCard
               name={item.title}
               image={item.image}

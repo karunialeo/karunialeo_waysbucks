@@ -3,17 +3,17 @@ import { LogoWhite, QRImg } from "../exports/exportImages";
 import { uploads } from "../exports";
 
 import formatThousands from "format-thousands";
-import { OrderContext } from "../contexts/OrderContext";
+import { UserContext } from "../contexts/UserContext";
 
 import dateFormat from "dateformat";
 
 export default function TransactionCard() {
-  const [order, setOrder] = useContext(OrderContext);
+  const [state, dispatch] = useContext(UserContext);
 
   return (
     <>
       <div className="w-full lg:w-8/12 space-y-4 mb-4 lg:mb-0">
-        {order.map((item) => (
+        {state.user.order.map((item) => (
           <div className="flex" key={item.id}>
             <img
               src={uploads + item.product.image}
@@ -27,7 +27,7 @@ export default function TransactionCard() {
               <p className="text-xs">
                 {dateFormat(item.createdAt, "dddd, mmmm dd, yyyy")}
               </p>
-              <p className="text-xs">Topping : {item.topping.title}</p>
+              <p className="text-xs">Topping : {item.product.title}</p>
               <p className="text-sm">
                 Price : Rp {formatThousands(item.price, ".")},-
               </p>
@@ -45,7 +45,7 @@ export default function TransactionCard() {
           <p className="text-xs text-yellow-900 font-bold">
             Sub Total : Rp{" "}
             {formatThousands(
-              order
+              state.user.order
                 .map((item) => item.price)
                 .reduce((prev, next) => prev + next),
               "."

@@ -1,4 +1,4 @@
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +24,7 @@ import {
 } from "../exports/exportImages";
 
 import { OrderContext } from "../contexts/OrderContext";
+import { uploads } from "../exports";
 
 function Navbar() {
   const [login, setLogin] = useContext(LoginContext);
@@ -51,25 +52,34 @@ function Navbar() {
       <div className="space-x-5 justify-end flex items-center relative">
         {login ? (
           <>
-            <Link
-              to={admin ? "/transactions" : "/my-cart"}
-              className="relative"
+            <p
+              className={
+                (admin ? null : "sr-only lg:not-sr-only ") + "text-brand-red"
+              }
             >
-              <img src={BasketIcon} alt="shopping-basket" />
-              {admin ? null : order.length > 0 ? (
-                <div className="w-5 h-5 text-xs text-white font-bold bg-red-600 rounded-full absolute -right-2 -top-1 flex justify-center items-center">
-                  {order.length}
-                </div>
-              ) : null}
-            </Link>
+              Welcome,{admin ? " Admin " : null} {state.user.fullname}!
+            </p>
+            {admin ? null : (
+              <Link
+                to={admin ? "/transactions" : "/my-cart"}
+                className="relative"
+              >
+                <img src={BasketIcon} alt="shopping-basket" />
+                {order.length > 0 ? (
+                  <div className="w-5 h-5 text-xs text-white font-bold bg-red-600 rounded-full absolute -right-2 -top-1 flex justify-center items-center">
+                    {order.length}
+                  </div>
+                ) : null}
+              </Link>
+            )}
             <Menu as="div" className="relative z-10">
               <div>
                 <Menu.Button>
                   <span className="sr-only">Open user menu</span>
                   <img
-                    src={admin ? LogoBlack : UserImg}
+                    src={admin ? LogoBlack : uploads + state.user.profile.image}
                     alt="user"
-                    className="h-14 w-14 object-cover rounded-full border-2 border-brand-red"
+                    className="max-h-14 w-14 object-cover rounded-full border-2 border-brand-red"
                   />
                 </Menu.Button>
               </div>

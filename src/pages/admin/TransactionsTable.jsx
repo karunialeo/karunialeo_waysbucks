@@ -9,9 +9,9 @@ import { CancelIcon, ConfirmIcon } from "../../exports/exportImages";
 
 export default function TransactionsTable() {
   const [open, setOpen] = useContext(TransactionModalContext);
-  useEffect(() => {
-    document.title = globalTitle + "Transactions";
-  }, []);
+  // useEffect(() => {
+  //   document.title = globalTitle + "Transactions";
+  // }, []);
 
   function checkStatus(status) {
     if (status == "Waiting Approve") {

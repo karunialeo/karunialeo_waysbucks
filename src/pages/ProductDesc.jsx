@@ -168,7 +168,9 @@ export default function ProductDesc({ item }) {
                       className="w-16 hover:opacity-75"
                     />
                     <h4 className="text-sm mt-3">{item.title}</h4>
-                    <p className="text-xs mt-3">{item.price}</p>
+                    <p className="text-xs mt-3">
+                      Rp {formatThousands(item.price, ".")},-
+                    </p>
                   </label>
                   {checked && (
                     <div className="bg-green-600 text-white text-xs rounded-full absolute right-10 top-14">

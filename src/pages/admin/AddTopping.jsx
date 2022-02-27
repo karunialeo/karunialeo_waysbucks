@@ -17,6 +17,8 @@ export default function AddTopping() {
     image: "",
   });
 
+  const { title, price, image } = form;
+
   // Handle change data on form
   const handleChange = (e) => {
     setForm({
@@ -105,6 +107,7 @@ export default function AddTopping() {
             type="text"
             name="title"
             onChange={handleChange}
+            value={title}
             placeholder="Topping Name"
             className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
           />
@@ -112,6 +115,7 @@ export default function AddTopping() {
             type="text"
             name="price"
             onChange={handleChange}
+            value={price}
             placeholder="Price (Rp.)"
             className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
           />
@@ -127,6 +131,7 @@ export default function AddTopping() {
                 id="image"
                 name="image"
                 onChange={handleChange}
+                value={image}
                 type="file"
                 className="sr-only"
               />

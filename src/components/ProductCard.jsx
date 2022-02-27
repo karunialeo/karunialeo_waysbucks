@@ -2,12 +2,12 @@ import React from "react";
 
 function ProductCard(props) {
   return (
-    <div className="product-card rounded-md relative mb-10 w-64 lg:mr-4 bg-brand-pink">
+    <div className="product-card rounded-md relative mb-10 w-64 bg-brand-pink">
       <div>
         <img
           src={props.image}
           alt="product-1"
-          className="w-full max-h-80 rounded-md"
+          className="w-full h-80 rounded-md"
         />
       </div>
       <div className="text-brand-red py-3 pl-4 ">

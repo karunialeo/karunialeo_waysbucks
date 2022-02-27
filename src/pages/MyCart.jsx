@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { globalTitle } from "../components/App";
 import { Link } from "react-router-dom";
 import PaymentForm from "../components/PaymentForm";
@@ -13,6 +13,24 @@ import { UserContext } from "../contexts/UserContext";
 function MyCart() {
   const [order, setOrder] = useContext(OrderContext);
   const [state, dispatch] = useContext(UserContext);
+  const [preview, setPreview] = useState(null);
+  const [form, setForm] = useState({
+    attachment: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]:
+        e.target.type === "file" ? e.target.files : e.target.value,
+    });
+
+    // Create image url for preview
+    if (e.target.type === "file") {
+      let url = URL.createObjectURL(e.target.files[0]);
+      setPreview(url);
+    }
+  };
 
   const getOrders = async () => {
     try {
@@ -125,11 +143,28 @@ function MyCart() {
                     </span>
                   </div>
                 </div>
-                <button className="bg-pink-100 w-5/12 lg:w-4/12 border-2 border-brand-red rounded-lg flex flex-col items-center justify-center gap-y-4">
-                  <img src={InvoiceIcon} alt="invoices" />
+                <label
+                  htmlFor="attachment"
+                  className="bg-pink-100 w-5/12 lg:w-4/12 border-2 border-brand-red rounded-lg flex flex-col items-center justify-center text-center gap-y-4 cursor-pointer"
+                >
+                  <img
+                    src={preview ? preview : InvoiceIcon}
+                    alt="invoices"
+                    className={(preview ? "my-4 " : null) + "max-h-40"}
+                  />
                   <p className="text-gray-500">Attach of Transaction</p>
-                </button>
+                  <input
+                    form="paymentForm"
+                    id="attachment"
+                    name="attachment"
+                    type="file"
+                    required
+                    onChange={handleChange}
+                    className="sr-only"
+                  ></input>
+                </label>
               </div>
+              {/* <div>{preview && <img src={preview} alt="" />}</div> */}
             </div>
             <div className="w-full lg:w-4/12">
               <PaymentForm />

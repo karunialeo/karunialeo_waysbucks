@@ -5,11 +5,15 @@ import { globalTitle } from "../components/App";
 import TransactionCard from "../components/TransactionCard";
 
 import { UserContext } from "../contexts/UserContext";
+import { ProcessOrderContext } from "../contexts/OrderContext";
 
 import { uploads } from "../exports";
 
 export default function MyProfile() {
   const [state, dispatch] = useContext(UserContext);
+  const [processOrder, setProcessOrder] = useContext(ProcessOrderContext);
+
+  console.log(state);
 
   useEffect(() => {
     document.title = globalTitle + "My Profile";
@@ -79,18 +83,24 @@ export default function MyProfile() {
       <div className="w-full lg:w-1/2">
         <div>
           <h3 className="text-3xl font-['Avenir-Black'] font-extrabold text-brand-red">
-            My Transaction
+            Ongoing Transaction
           </h3>
-          {state.user.order.length > 0 ? (
+          {processOrder.length > 0 ? (
             <div className="lg:flex justify-between my-8 bg-brand-pink rounded-lg p-4">
               <TransactionCard />
             </div>
           ) : (
             <div className="py-5 text-brand-red">
-              <p className="text-lg mb-4">Cart is Empty.</p>
-              <Link to="/" className="hover:underline">
-                Continue shopping.
-              </Link>
+              <p className="text-lg mb-4">No Ongoing Transaction.</p>
+              {state.user.order.length > 0 ? (
+                <Link to="/my-cart" className="hover:underline">
+                  Checkout your cart.
+                </Link>
+              ) : (
+                <Link to="/" className="hover:underline">
+                  Continue Shopping.
+                </Link>
+              )}
             </div>
           )}
         </div>

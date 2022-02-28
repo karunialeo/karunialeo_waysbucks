@@ -11,7 +11,6 @@ import {
 } from "../contexts/AuthContext";
 import { ModalContext } from "../contexts/ModalContext";
 import { UserContext } from "../contexts/UserContext";
-import { OrderContext } from "../contexts/OrderContext";
 
 import { uploads } from "../exports";
 import {
@@ -23,14 +22,15 @@ import {
   ToppingIcon,
   userIcon,
 } from "../exports/exportImages";
+import { OrderContext } from "../contexts/OrderContext";
 
 function Navbar() {
   const [login, setLogin] = useContext(LoginContext);
   const [admin, setAdmin] = useContext(AdminContext);
   const [registered, setRegistered] = useContext(RegisteredContext);
   const [state, dispatch] = useContext(UserContext);
-  const [open, setOpen] = useContext(ModalContext);
   const [order, setOrder] = useContext(OrderContext);
+  const [open, setOpen] = useContext(ModalContext);
 
   let navigate = useNavigate();
 
@@ -58,10 +58,7 @@ function Navbar() {
               Welcome,{admin ? " Admin " : null} {state.user.fullname}!
             </p>
             {admin ? null : (
-              <Link
-                to={admin ? "/transactions" : "/my-cart"}
-                className="relative"
-              >
+              <Link to="/my-cart" className="relative">
                 <img src={BasketIcon} alt="shopping-basket" />
                 {order.length > 0 ? (
                   <div className="w-5 h-5 text-xs text-white font-bold bg-red-600 rounded-full absolute -right-2 -top-1 flex justify-center items-center">

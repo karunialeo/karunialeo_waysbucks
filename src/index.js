@@ -5,10 +5,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import { AlertProvider, LoginProvider, AdminProvider } from "./contexts/AuthContext";
 import { UserProvider } from "./contexts/UserContext";
-import { OrderProvider } from './contexts/OrderContext';
+import { OrderProvider, ProcessOrderProvider, SuccessOrderProvider } from './contexts/OrderContext';
 import { ProfileProvider } from "./contexts/ProfileContext";
 
 import "./index.css";
+import { TransactionProvider } from "./contexts/TransactionContext";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,11 +18,17 @@ ReactDOM.render(
         <LoginProvider>
           <ProfileProvider>
             <AlertProvider>
-              <OrderProvider>
-                  <Router>
-                    <App />
-                  </Router>
-              </OrderProvider>
+                <TransactionProvider>
+                  <OrderProvider>
+                    <SuccessOrderProvider>
+                      <ProcessOrderProvider>
+                        <Router>
+                          <App />
+                        </Router>
+                      </ProcessOrderProvider>
+                    </SuccessOrderProvider>
+                  </OrderProvider>
+                </TransactionProvider>
             </AlertProvider>
           </ProfileProvider>
         </LoginProvider>

@@ -5,7 +5,7 @@ import TransactionCard from "../../components/TransactionCard";
 
 import { TransactionModalContext } from "../../contexts/ModalContext";
 
-export default function TransactionModal() {
+export default function TransactionModal({ preview }) {
   const [open, setOpen] = useContext(TransactionModalContext);
 
   const cancelButtonRef = useRef(null);
@@ -48,7 +48,7 @@ export default function TransactionModal() {
             <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
               <div className="bg-white px-0 pt-0 pb-0 sm:p-0 sm:pb-0">
                 <div className="lg:flex justify-between bg-brand-pink rounded-lg p-4">
-                  <TransactionCard />
+                  {preview}
                 </div>
               </div>
             </div>

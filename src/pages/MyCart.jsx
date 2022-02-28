@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import formatThousands from "format-thousands";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import urlSlug from "url-slug";
 import { globalTitle } from "../components/App";
 import { API } from "../config/api";
 
 import { UserContext } from "../contexts/UserContext";
-import { OrderContext } from "../contexts/OrderContext";
 import { CartModalContext } from "../contexts/ModalContext";
+import { OrderContext, ProcessOrderContext } from "../contexts/OrderContext";
 
 import { uploads } from "../exports";
 import { CartModal } from "../exports";
@@ -16,16 +17,21 @@ function MyCart() {
   const [order, setOrder] = useContext(OrderContext);
   const [open, setOpen] = useContext(CartModalContext);
   const [state, dispatch] = useContext(UserContext);
+
   const [preview, setPreview] = useState(null);
+  const [total, setTotal] = useState(0);
   const [form, setForm] = useState({
     fullname: state.user.fullname,
     email: state.user.email,
     phone: state.user.profile.phone ? state.user.profile.phone : "",
     address: state.user.profile.address ? state.user.profile.address : "",
+    totalPrice: total,
     attachment: "",
   });
 
-  const { fullname, email, phone, address, attachment } = form;
+  // let navigate = useNavigate();
+
+  const { fullname, email, phone, address, totalPrice, attachment } = form;
 
   const handleChange = (e) => {
     setForm({
@@ -45,18 +51,32 @@ function MyCart() {
     try {
       e.preventDefault();
 
+      // Configuration
+      const config = {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      };
+
+      form.totalPrice = order
+        .map((item) => item.price)
+        .reduce((prev, next) => prev + next);
+
       const formData = new FormData();
       formData.set("fullname", form.fullname);
       formData.set("email", form.email);
       formData.set("phone", form.phone);
       formData.set("address", form.address);
+      formData.set("totalPrice", form.totalPrice);
       formData.set("attachment", form.attachment[0], form.attachment[0].name);
 
-      console.log(form);
+      const response = await API.post("/transaction", formData, config);
+      console.log(response);
 
       setOpen(!open);
       setTimeout(() => {
         setOpen(false);
+        // navigate(`/profile/${urlSlug(state.user.fullname)}`);
       }, 5000);
     } catch (error) {
       console.log(error);
@@ -200,6 +220,13 @@ function MyCart() {
               <form id="paymentForm" onSubmit={handleSubmit}>
                 <div className="space-y-6 mb-8">
                   <input
+                    type="hidden"
+                    name="totalPrice"
+                    id="totalPrice"
+                    onChange={handleChange}
+                    value={totalPrice}
+                  />
+                  <input
                     type="text"
                     name="fullname"
                     placeholder="Name"
@@ -210,7 +237,7 @@ function MyCart() {
                   />
                   <input
                     type="email"
-                    name="userEmail"
+                    name="email"
                     placeholder="Email"
                     onChange={handleChange}
                     value={email}

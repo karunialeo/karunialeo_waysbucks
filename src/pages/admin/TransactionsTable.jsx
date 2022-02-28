@@ -1,15 +1,80 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import formatThousands from "format-thousands";
-import Customers from "../../tempDatabase/Customers";
+import { Link } from "react-router-dom";
+import { API } from "../../config/api";
 
 import TransactionModal from "../../components/modal/TransactionModal";
 
 import { TransactionModalContext } from "../../contexts/ModalContext";
 
 import { CancelIcon, ConfirmIcon } from "../../exports/exportImages";
+import { LoginContext } from "../../contexts/AuthContext";
 
 export default function TransactionsTable() {
+  const [transactions, setTransactions] = useState([]);
+  const [preview, setPreview] = useState(null);
+
   const [open, setOpen] = useContext(TransactionModalContext);
+  const [login, setLogin] = useContext(LoginContext);
+
+  const getTransactions = async () => {
+    try {
+      const response = await API.get("/transactions");
+      // Store order data to useState variabel
+      setTransactions(response.data.transactions);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getTransactions();
+    return () => {
+      setTransactions([]);
+    };
+  }, [login]);
+
+  const handleCancel = async (id) => {
+    try {
+      // Configuration Content-type
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      const body = {
+        status: "Cancel",
+      };
+
+      // Insert data user to database
+      const response = await API.patch(`/transaction/${id}`, body, config);
+      getTransactions();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleApprove = async (id) => {
+    try {
+      // Configuration Content-type
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      const body = {
+        status: "On The Way",
+      };
+
+      // Insert data user to database
+      const response = await API.patch(`/transaction/${id}`, body, config);
+      getTransactions();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   function checkStatus(status) {
     if (status == "Waiting Approve") {
@@ -23,14 +88,22 @@ export default function TransactionsTable() {
     }
   }
 
-  function checkAction(status) {
+  function checkAction(status, id) {
     if (status == "Waiting Approve") {
       return (
         <>
-          <button className="px-4 inline-flex text-xs leading-5 font-semibold rounded-md bg-button-cancel text-white">
+          <button
+            type="button"
+            onClick={() => handleCancel(id)}
+            className="px-4 inline-flex text-xs leading-5 font-semibold rounded-md bg-button-cancel text-white"
+          >
             Cancel
           </button>
-          <button className="px-4 inline-flex text-xs leading-5 font-semibold rounded-md bg-button-confirm text-white">
+          <button
+            type="button"
+            onClick={() => handleApprove(id)}
+            className="px-4 inline-flex text-xs leading-5 font-semibold rounded-md bg-button-confirm text-white"
+          >
             Approve
           </button>
         </>
@@ -62,7 +135,7 @@ export default function TransactionsTable() {
         <h3 className="mx-4 lg:mx-32 text-brand-red text-3xl font-['Avenir-Black'] mb-10">
           Income Transaction
         </h3>
-        <div className="lg:mx-40 mx-4 flex justify-start overflow-x-auto">
+        <div className="lg:mx-10 mx-4 flex justify-start overflow-x-auto">
           <table className="lg:w-full divide-y divide-x divide-gray-300 border-2">
             <thead className="bg-gray-200">
               <tr className="divide-x divide-gray-300">
@@ -88,7 +161,13 @@ export default function TransactionsTable() {
                   scope="col"
                   className="px-4 py-2 text-left text-base font-['Avenir-Black'] text-black tracking-wider"
                 >
-                  Postcode
+                  Attachment
+                </th>
+                <th
+                  scope="col"
+                  className="px-4 py-2 text-left text-base font-['Avenir-Black'] text-black tracking-wider"
+                >
+                  Phone
                 </th>
                 <th
                   scope="col"
@@ -111,33 +190,44 @@ export default function TransactionsTable() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {Customers.map((customer, i) => (
-                <tr className="divide-x divide-gray-300" key={i}>
-                  <td className="px-4 py-2 whitespace-nowrap">{i + 1}</td>
+              {transactions.map((transaction) => (
+                <tr className="divide-x divide-gray-300" key={transaction.id}>
                   <td className="px-4 py-2 whitespace-nowrap">
-                    {customer.name}
+                    {transaction.id}
                   </td>
                   <td className="px-4 py-2 whitespace-nowrap">
-                    {customer.address}
+                    {transaction.fullname}
                   </td>
                   <td className="px-4 py-2 whitespace-nowrap">
-                    {customer.postcode}
+                    {transaction.address}
+                  </td>
+                  <td className="px-4 py-2 whitespace-nowrap flex justify-center">
+                    <a href={transaction.attachment} target="blank">
+                      <img
+                        src={transaction.attachment}
+                        className="max-h-16"
+                        alt=""
+                      />
+                    </a>
+                  </td>
+                  <td className="px-4 py-2 whitespace-nowrap">
+                    {transaction.phone}
                   </td>
                   <td className="px-4 py-2 whitespace-nowrap">
                     <button onClick={() => setOpen(!open)}>
-                      Rp {formatThousands(customer.income, ".")},-
+                      Rp {formatThousands(transaction.totalPrice, ".")},-
                     </button>
                   </td>
                   <td
                     className={
-                      checkStatus(customer.status) +
+                      checkStatus(transaction.status) +
                       " px-4 py-2 whitespace-nowrap"
                     }
                   >
-                    {customer.status}
+                    {transaction.status}
                   </td>
                   <td className="px-4 py-2 whitespace-nowrap space-x-2 flex justify-center">
-                    {checkAction(customer.status)}
+                    {checkAction(transaction.status, transaction.id)}
                   </td>
                 </tr>
               ))}
@@ -145,7 +235,8 @@ export default function TransactionsTable() {
           </table>
         </div>
       </div>
-      <TransactionModal />
+      <TransactionModal preview={preview} />
+      {/* <p>{transactions[0].fullname}</p> */}
     </>
   );
 }

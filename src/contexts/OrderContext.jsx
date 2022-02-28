@@ -31,3 +31,59 @@ export const OrderProvider = ({ children }) => {
     </OrderContext.Provider>
   );
 };
+
+export const ProcessOrderContext = createContext();
+
+export const ProcessOrderProvider = ({ children }) => {
+  const [processOrder, setProcessOrder] = useState([]);
+  const [state, dispatch] = useContext(UserContext);
+  const [login, setLogin] = useContext(LoginContext);
+
+  const getProcessOrders = async () => {
+    try {
+      const response = await API.get(`/orders/process/${state.user.id}`);
+      // Store order data to useState variabel
+      setProcessOrder(response.data.orders);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getProcessOrders();
+  }, [login]);
+
+  return (
+    <ProcessOrderContext.Provider value={[processOrder, setProcessOrder]}>
+      {children}
+    </ProcessOrderContext.Provider>
+  );
+};
+
+export const SuccessOrderContext = createContext();
+
+export const SuccessOrderProvider = ({ children }) => {
+  const [successOrder, setSuccessOrder] = useState([]);
+  const [state, dispatch] = useContext(UserContext);
+  const [login, setLogin] = useContext(LoginContext);
+
+  const getSuccessOrders = async () => {
+    try {
+      const response = await API.get(`/orders/success/${state.user.id}`);
+      // Store order data to useState variabel
+      setSuccessOrder(response.data.orders);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getSuccessOrders();
+  }, [login]);
+
+  return (
+    <SuccessOrderContext.Provider value={[successOrder, setSuccessOrder]}>
+      {children}
+    </SuccessOrderContext.Provider>
+  );
+};

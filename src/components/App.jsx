@@ -30,6 +30,7 @@ import {
 } from "../exports/exportPages";
 
 import "../assets/styles/App.css";
+import { TransactionsProvider } from "../contexts/TransactionContext";
 
 export const globalTitle = "Waysbucks Store | ";
 
@@ -107,9 +108,11 @@ export default function App() {
           path="/"
           element={
             admin && login ? (
-              <TransactionModalProvider>
-                <TransactionsTable />
-              </TransactionModalProvider>
+              <TransactionsProvider>
+                <TransactionModalProvider>
+                  <TransactionsTable />
+                </TransactionModalProvider>
+              </TransactionsProvider>
             ) : (
               <LandingPage />
             )
@@ -133,14 +136,6 @@ export default function App() {
         <Route exact path="/" element={<AdminRoute />}>
           <Route path="/add-product" element={<AddProduct />} />
           <Route path="/add-topping" element={<AddTopping />} />
-          {/* <Route
-            path="/transactions"
-            element={
-              <TransactionModalProvider>
-                <TransactionsTable />
-              </TransactionModalProvider>
-            }
-          /> */}
         </Route>
       </Routes>
     </>

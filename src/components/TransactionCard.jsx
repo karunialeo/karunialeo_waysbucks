@@ -1,19 +1,24 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import formatThousands from "format-thousands";
 import dateFormat from "dateformat";
 import { API } from "../config/api";
+import TransactionModal from "./modal/TransactionModal";
 
 import { UserContext } from "../contexts/UserContext";
+import { ProcessOrderContext } from "../contexts/OrderContext";
+import { TransactionContext } from "../contexts/TransactionContext";
+import { TransactionModalContext } from "../contexts/ModalContext";
 
 import { LogoWhite, QRImg } from "../exports/exportImages";
 import { uploads } from "../exports";
-import { ProcessOrderContext } from "../contexts/OrderContext";
-import { TransactionContext } from "../contexts/TransactionContext";
 
 export default function TransactionCard() {
+  let navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
   const [processOrder, setProcessOrder] = useContext(ProcessOrderContext);
   const [transaction, setTransaction] = useContext(TransactionContext);
+  const [open, setOpen] = useContext(TransactionModalContext);
 
   function checkStatus(status) {
     if (status == "Waiting Approve") {
@@ -26,6 +31,31 @@ export default function TransactionCard() {
       return "text-cyan-500 bg-cyan-200";
     }
   }
+
+  const handleSuccess = async (id) => {
+    try {
+      // Configuration Content-type
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      const body = {
+        status: "Success",
+      };
+
+      // Insert data user to database
+      const response = await API.patch(
+        `/transaction/success/${id}`,
+        body,
+        config
+      );
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -58,7 +88,7 @@ export default function TransactionCard() {
       <div className="flex flex-row lg:flex-col justify-between lg:justify-start items-center lg:space-y-4">
         <img src={LogoWhite} alt="" className="" />
         <img src={QRImg} alt="" />
-        <div className="space-y-7">
+        <div className="space-y-4">
           <p
             className={
               checkStatus(transaction.status) +
@@ -67,6 +97,15 @@ export default function TransactionCard() {
           >
             {transaction.status}
           </p>
+          {transaction.status === "On The Way" ? (
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              className="bg-green-600 text-white hover:text-green-600 hover:bg-white transition duration-300 text-xs text-center font-bold px-5 py-1 rounded-md"
+            >
+              Confirm Arrival
+            </button>
+          ) : null}
           <p className="text-xs text-center text-yellow-900 font-bold">
             Sub Total : Rp{" "}
             {formatThousands(
@@ -79,6 +118,29 @@ export default function TransactionCard() {
           </p>
         </div>
       </div>
+      <TransactionModal
+        preview={
+          <div className="block p-6 w-full space-y-5">
+            <div>Please confirm that you have receive your order. Proceed?</div>
+            <div className="flex justify-between space-x-5">
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="bg-brand-red text-white hover:bg-red-500 transition duration-300 text-xs text-center font-bold px-5 py-3 rounded-md w-1/2"
+              >
+                No
+              </button>
+              <button
+                type="button"
+                onClick={() => handleSuccess(transaction.id)}
+                className="bg-green-600 text-white hover:bg-green-500 transition duration-300 text-xs text-center font-bold px-5 py-3 rounded-md w-1/2"
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        }
+      />
     </>
   );
 }

@@ -48,7 +48,11 @@ export default function TransactionsTable() {
       };
 
       // Insert data user to database
-      const response = await API.patch(`/transaction/${id}`, body, config);
+      const response = await API.patch(
+        `/transaction/cancel/${id}`,
+        body,
+        config
+      );
       getTransactions();
     } catch (error) {
       console.log(error);
@@ -211,7 +215,7 @@ export default function TransactionsTable() {
                     </a>
                   </td>
                   <td className="px-4 py-2 whitespace-nowrap">
-                    {transaction.phone}
+                    <a href={"tel:" + transaction.phone}>{transaction.phone}</a>
                   </td>
                   <td className="px-4 py-2 whitespace-nowrap">
                     <button onClick={() => setOpen(!open)}>

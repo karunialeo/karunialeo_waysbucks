@@ -23,6 +23,7 @@ import {
   userIcon,
 } from "../exports/exportImages";
 import { OrderContext } from "../contexts/OrderContext";
+import { TransactionContext } from "../contexts/TransactionContext";
 
 function Navbar() {
   const [login, setLogin] = useContext(LoginContext);
@@ -31,6 +32,7 @@ function Navbar() {
   const [state, dispatch] = useContext(UserContext);
   const [order, setOrder] = useContext(OrderContext);
   const [open, setOpen] = useContext(ModalContext);
+  const [transaction, setTransaction] = useContext(TransactionContext);
 
   let navigate = useNavigate();
 
@@ -76,6 +78,11 @@ function Navbar() {
                     alt="user"
                     className="max-h-14 w-14 object-cover rounded-full border-2 border-brand-red"
                   />
+                  {transaction ? (
+                    <div className="w-5 h-5 text-xs text-white font-bold bg-red-600 rounded-full absolute -right-2 -top-1 flex justify-center items-center">
+                      !
+                    </div>
+                  ) : null}
                 </Menu.Button>
               </div>
               <Transition

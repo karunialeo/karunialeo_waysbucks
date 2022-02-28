@@ -129,7 +129,14 @@ export default function App() {
               </CartModalProvider>
             }
           />
-          <Route path="/profile/:fullname" element={<MyProfile />} />
+          <Route
+            path="/profile/:fullname"
+            element={
+              <TransactionModalProvider>
+                <MyProfile />
+              </TransactionModalProvider>
+            }
+          />
           <Route path="/profile/edit" element={<EditProfile />} />
         </Route>
 

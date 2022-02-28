@@ -1,13 +1,14 @@
 import React from "react";
+import App from "./components/App";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import "./index.css";
-import App from "./components/App";
+
 import { AlertProvider, LoginProvider, AdminProvider } from "./contexts/AuthContext";
 import { UserProvider } from "./contexts/UserContext";
 import { OrderProvider } from './contexts/OrderContext';
 import { ProfileProvider } from "./contexts/ProfileContext";
 
+import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>

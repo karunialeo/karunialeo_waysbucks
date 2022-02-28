@@ -1,7 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import { AlertContext } from "../contexts/AuthContext";
-import { JumbotronBg, JumbotronImg } from "../exports/exportImages";
 import { globalTitle } from "./App";
+
+import { AlertContext } from "../contexts/AuthContext";
+
+import { JumbotronBg, JumbotronImg } from "../exports/exportImages";
 
 function Jumbotron() {
   const [alert, setAlert] = useContext(AlertContext);

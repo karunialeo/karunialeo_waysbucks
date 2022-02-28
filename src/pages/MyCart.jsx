@@ -1,22 +1,31 @@
 import { useContext, useEffect, useState } from "react";
-import { globalTitle } from "../components/App";
-import { Link } from "react-router-dom";
-import PaymentForm from "../components/PaymentForm";
-import { InvoiceIcon } from "../exports/exportImages";
-import { uploads } from "../exports";
-
 import formatThousands from "format-thousands";
-import { OrderContext } from "../contexts/OrderContext";
+import { Link } from "react-router-dom";
+import { globalTitle } from "../components/App";
 import { API } from "../config/api";
+
 import { UserContext } from "../contexts/UserContext";
+import { OrderContext } from "../contexts/OrderContext";
+import { CartModalContext } from "../contexts/ModalContext";
+
+import { uploads } from "../exports";
+import { CartModal } from "../exports";
+import { InvoiceIcon } from "../exports/exportImages";
 
 function MyCart() {
   const [order, setOrder] = useContext(OrderContext);
+  const [open, setOpen] = useContext(CartModalContext);
   const [state, dispatch] = useContext(UserContext);
   const [preview, setPreview] = useState(null);
   const [form, setForm] = useState({
+    fullname: state.user.fullname,
+    email: state.user.email,
+    phone: state.user.profile.phone ? state.user.profile.phone : "",
+    address: state.user.profile.address ? state.user.profile.address : "",
     attachment: "",
   });
+
+  const { fullname, email, phone, address, attachment } = form;
 
   const handleChange = (e) => {
     setForm({
@@ -29,6 +38,28 @@ function MyCart() {
     if (e.target.type === "file") {
       let url = URL.createObjectURL(e.target.files[0]);
       setPreview(url);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      const formData = new FormData();
+      formData.set("fullname", form.fullname);
+      formData.set("email", form.email);
+      formData.set("phone", form.phone);
+      formData.set("address", form.address);
+      formData.set("attachment", form.attachment[0], form.attachment[0].name);
+
+      console.log(form);
+
+      setOpen(!open);
+      setTimeout(() => {
+        setOpen(false);
+      }, 5000);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -164,10 +195,56 @@ function MyCart() {
                   ></input>
                 </label>
               </div>
-              {/* <div>{preview && <img src={preview} alt="" />}</div> */}
             </div>
             <div className="w-full lg:w-4/12">
-              <PaymentForm />
+              <form id="paymentForm" onSubmit={handleSubmit}>
+                <div className="space-y-6 mb-8">
+                  <input
+                    type="text"
+                    name="fullname"
+                    placeholder="Name"
+                    onChange={handleChange}
+                    value={fullname}
+                    required
+                    className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
+                  />
+                  <input
+                    type="email"
+                    name="userEmail"
+                    placeholder="Email"
+                    onChange={handleChange}
+                    value={email}
+                    required
+                    className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
+                  />
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone"
+                    onChange={handleChange}
+                    value={phone}
+                    required
+                    className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
+                  />
+                  <textarea
+                    name="address"
+                    id="address"
+                    className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
+                    rows={5}
+                    placeholder="Address"
+                    onChange={handleChange}
+                    value={address}
+                    required
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full py-2 rounded-md text-white text-center bg-brand-red"
+                >
+                  Pay
+                </button>
+              </form>
+              <CartModal />
             </div>
           </div>
         </>

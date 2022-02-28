@@ -1,11 +1,13 @@
 import { useState, useEffect, useContext } from "react";
-import { globalTitle } from "../components/App";
-import { API } from "../config/api";
-import { useNavigate, useParams } from "react-router-dom";
 import formatThousands from "format-thousands";
-import { CheckList, uploads } from "../exports";
+import { useNavigate, useParams } from "react-router-dom";
+import { API } from "../config/api";
+import { globalTitle } from "../components/App";
+
 import { OrderContext } from "../contexts/OrderContext";
 import { UserContext } from "../contexts/UserContext";
+
+import { uploads } from "../exports";
 
 export default function ProductDesc({ item }) {
   let { id } = useParams();

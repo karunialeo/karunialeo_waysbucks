@@ -1,17 +1,15 @@
-import { useEffect, useContext } from "react";
-import { globalTitle } from "../../components/App";
-
+import { useContext } from "react";
 import formatThousands from "format-thousands";
 import Customers from "../../tempDatabase/Customers";
+
 import TransactionModal from "../../components/modal/TransactionModal";
+
 import { TransactionModalContext } from "../../contexts/ModalContext";
+
 import { CancelIcon, ConfirmIcon } from "../../exports/exportImages";
 
 export default function TransactionsTable() {
   const [open, setOpen] = useContext(TransactionModalContext);
-  // useEffect(() => {
-  //   document.title = globalTitle + "Transactions";
-  // }, []);
 
   function checkStatus(status) {
     if (status == "Waiting Approve") {

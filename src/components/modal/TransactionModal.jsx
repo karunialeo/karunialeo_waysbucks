@@ -2,6 +2,7 @@ import { useRef, Fragment, useContext } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 import TransactionCard from "../../components/TransactionCard";
+
 import { TransactionModalContext } from "../../contexts/ModalContext";
 
 export default function TransactionModal() {

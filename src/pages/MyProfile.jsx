@@ -1,8 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { globalTitle } from "../components/App";
-import TransactionCard from "../components/TransactionCard";
-import { UserContext } from "../contexts/UserContext";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { globalTitle } from "../components/App";
+
+import TransactionCard from "../components/TransactionCard";
+
+import { UserContext } from "../contexts/UserContext";
+
 import { uploads } from "../exports";
 
 export default function MyProfile() {
@@ -40,9 +43,19 @@ export default function MyProfile() {
           </Link>
         </div>
         <div className="flex">
-          <div className="mr-4 w-48 lg:mr-8">
-            <img src={uploads + state.user.profile.image} alt="" />
-          </div>
+          <label
+            className="mr-4 w-48 lg:mr-8 relative cursor-pointer"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="Change Photo"
+          >
+            <input type="file" className="sr-only" />
+            <img
+              src={uploads + state.user.profile.image}
+              alt=""
+              className="hover:brightness-75"
+            />
+          </label>
           <div className="space-y-4">
             <p className="text-yellow-700 font-bold">Full Name</p>
             <p>{state.user.fullname}</p>

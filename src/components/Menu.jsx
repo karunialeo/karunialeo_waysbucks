@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import ProductCard from "./ProductCard";
 import formatThousands from "format-thousands";
 import { API } from "../config/api";
+
+import { ProductCard } from "../exports";
 
 function Menu() {
   const [products, setProducts] = useState([]);

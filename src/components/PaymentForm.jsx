@@ -1,9 +1,11 @@
 import { useContext, useState } from "react";
-import { CartModalContext } from "../contexts/ModalContext";
-import { UserContext } from "../contexts/UserContext";
+
 import CartModal from "./modal/CartModal";
 
-export default function PaymentForm() {
+import { CartModalContext } from "../contexts/ModalContext";
+import { UserContext } from "../contexts/UserContext";
+
+export default function PaymentForm({ attachmentFile }) {
   const [open, setOpen] = useContext(CartModalContext);
   const [state, dispatch] = useContext(UserContext);
   const [form, setForm] = useState({
@@ -11,20 +13,31 @@ export default function PaymentForm() {
     email: state.user.email,
     phone: state.user.profile.phone ? state.user.profile.phone : "",
     address: state.user.profile.address ? state.user.profile.address : "",
+    attachment: "",
   });
 
-  const { fullname, email, phone, address } = form;
+  const { fullname, email, phone, address, attachment } = form;
 
   const handleChange = (e) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [e.target.name]:
+        e.target.type === "file" ? e.target.files : e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+
+      const formData = new FormData();
+      formData.set("fullname", form.fullname);
+      formData.set("email", form.email);
+      formData.set("phone", form.phone);
+      formData.set("address", form.address);
+      // formData.set("attachment", form.attachment[0], form.attachment[0].name);
+
+      console.log(form.attachment);
 
       setOpen(!open);
       setTimeout(() => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { API } from "../config/api";
 import formatThousands from "format-thousands";
+import { API } from "../config/api";
 
 export default function CheckList({ title, price, image, id }) {
   const [toppings, setToppings] = useState([]);

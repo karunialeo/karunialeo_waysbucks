@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { LockClosedIcon } from "@heroicons/react/solid";
 import { API } from "../../config/api";
 
-import { LockClosedIcon } from "@heroicons/react/solid";
-import { LogoWhite } from "../../exports/exportImages";
 import { AdminContext, RegisteredContext } from "../../contexts/AuthContext";
 import { ModalContext } from "../../contexts/ModalContext";
-import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
+
+import { LogoWhite } from "../../exports/exportImages";
 
 export default function LoginModal() {
   let navigate = useNavigate();

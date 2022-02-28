@@ -1,9 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import "../assets/styles/App.css";
-
-import { API, setAuthToken } from "../config/api";
-
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { API, setAuthToken } from "../config/api";
 
 import CustomerRoute from "./privateRoute/CustomerRoute";
 import AdminRoute from "./privateRoute/AdminRoute";
@@ -20,6 +17,7 @@ import {
 } from "../contexts/ModalContext";
 import { UserContext } from "../contexts/UserContext";
 
+import { Modal, Navbar } from "../exports/";
 import {
   LandingPage,
   ProductDesc,
@@ -31,7 +29,7 @@ import {
   TransactionsTable,
 } from "../exports/exportPages";
 
-import { Modal, Navbar } from "../exports/";
+import "../assets/styles/App.css";
 
 export const globalTitle = "Waysbucks Store | ";
 

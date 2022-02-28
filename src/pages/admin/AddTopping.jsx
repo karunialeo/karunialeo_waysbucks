@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { globalTitle } from "../../components/App";
-import { UploadIcon } from "../../exports/exportImages";
 import { API } from "../../config/api";
+import { globalTitle } from "../../components/App";
+
+import { UploadIcon } from "../../exports/exportImages";
 
 export default function AddTopping() {
   console.clear();
@@ -108,6 +109,7 @@ export default function AddTopping() {
             name="title"
             onChange={handleChange}
             value={title}
+            required
             placeholder="Topping Name"
             className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
           />
@@ -116,6 +118,7 @@ export default function AddTopping() {
             name="price"
             onChange={handleChange}
             value={price}
+            required
             placeholder="Price (Rp.)"
             className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
           />
@@ -131,7 +134,7 @@ export default function AddTopping() {
                 id="image"
                 name="image"
                 onChange={handleChange}
-                value={image}
+                required
                 type="file"
                 className="sr-only"
               />

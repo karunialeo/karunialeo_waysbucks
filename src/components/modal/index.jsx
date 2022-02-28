@@ -1,8 +1,10 @@
 import { Fragment, useContext, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { LoginModal, RegisterModal } from "../../exports";
+
 import { ModalContext } from "../../contexts/ModalContext";
 import { RegisteredContext } from "../../contexts/AuthContext";
+
+import { LoginModal, RegisterModal } from "../../exports";
 
 export default function Modal() {
   const [open, setOpen] = useContext(ModalContext);

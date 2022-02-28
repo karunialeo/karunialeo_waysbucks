@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { globalTitle } from "../../components/App";
-import { UploadIcon } from "../../exports/exportImages";
 import { API } from "../../config/api";
+import { globalTitle } from "../../components/App";
+
+import { UploadIcon } from "../../exports/exportImages";
 
 export default function AddProduct() {
   console.clear();
@@ -45,17 +46,16 @@ export default function AddProduct() {
         },
       };
 
-      console.log(form);
-
       // Store data with FormData as object
       const formData = new FormData();
       formData.set("title", form.title);
       formData.set("price", form.price);
       formData.set("image", form.image[0], form.image[0].name);
 
+      console.log(form.image);
+
       // Insert product data
       const response = await API.post("/product", formData, config);
-      console.log(response);
 
       if (response.data.status === "Success...") {
         const alert = (
@@ -108,6 +108,7 @@ export default function AddProduct() {
             name="title"
             onChange={handleChange}
             value={title}
+            required
             placeholder="Product Name"
             className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
           />
@@ -116,6 +117,7 @@ export default function AddProduct() {
             name="price"
             onChange={handleChange}
             value={price}
+            required
             placeholder="Price (Rp.)"
             className="w-full p-3 outline outline-2 outline-red-500 focus:outline-red-700 rounded-md bg-pink-100"
           />
@@ -131,7 +133,7 @@ export default function AddProduct() {
                 id="image"
                 name="image"
                 onChange={handleChange}
-                value={price}
+                required
                 type="file"
                 className="sr-only"
               />

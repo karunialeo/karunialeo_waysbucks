@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect, useMemo, useState } from "react";
+import { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,9 @@ import {
 } from "../contexts/AuthContext";
 import { ModalContext } from "../contexts/ModalContext";
 import { UserContext } from "../contexts/UserContext";
+import { OrderContext } from "../contexts/OrderContext";
 
+import { uploads } from "../exports";
 import {
   BasketIcon,
   DrinkIcon,
@@ -20,11 +22,7 @@ import {
   LogoWhite,
   ToppingIcon,
   userIcon,
-  UserImg,
 } from "../exports/exportImages";
-
-import { OrderContext } from "../contexts/OrderContext";
-import { uploads } from "../exports";
 
 function Navbar() {
   const [login, setLogin] = useContext(LoginContext);

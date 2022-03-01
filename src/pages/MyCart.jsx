@@ -76,6 +76,7 @@ function MyCart() {
       setTimeout(() => {
         setOpen(false);
         navigate(`/`);
+        checkUser();
       }, 5000);
     } catch (error) {
       console.log(error);
@@ -96,6 +97,32 @@ function MyCart() {
     try {
       const response = await API.delete("/order/" + id);
       getOrders();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkUser = async () => {
+    try {
+      const response = await API.get("/check-auth");
+
+      // If the token incorrect
+      if (response.status === 404) {
+        return dispatch({
+          type: "AUTH_ERROR",
+        });
+      }
+
+      // Get user data
+      let payload = response.data.data.user;
+      // Get token from local storage
+      payload.token = localStorage.token;
+
+      // Send data to useContext
+      dispatch({
+        type: "USER_SUCCESS",
+        payload,
+      });
     } catch (error) {
       console.log(error);
     }

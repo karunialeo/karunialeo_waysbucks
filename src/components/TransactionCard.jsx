@@ -32,6 +32,32 @@ export default function TransactionCard() {
     }
   }
 
+  const checkUser = async () => {
+    try {
+      const response = await API.get("/check-auth");
+
+      // If the token incorrect
+      if (response.status === 404) {
+        return dispatch({
+          type: "AUTH_ERROR",
+        });
+      }
+
+      // Get user data
+      let payload = response.data.data.user;
+      // Get token from local storage
+      payload.token = localStorage.token;
+
+      // Send data to useContext
+      dispatch({
+        type: "USER_SUCCESS",
+        payload,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSuccess = async (id) => {
     try {
       // Configuration Content-type
@@ -51,6 +77,7 @@ export default function TransactionCard() {
         body,
         config
       );
+      checkUser();
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -106,6 +133,11 @@ export default function TransactionCard() {
               Confirm Arrival
             </button>
           ) : null}
+          <p className="text-sm text-center font-bold">
+            {transaction.fullname}
+          </p>
+          <p className="text-sm text-center">{transaction.phone}</p>
+          <p className="text-sm text-center">{transaction.address}</p>
           <p className="text-xs text-center text-yellow-900 font-bold">
             Sub Total : Rp{" "}
             {formatThousands(
@@ -115,9 +147,6 @@ export default function TransactionCard() {
               "."
             )}
             ,-
-          </p>
-          <p className="text-sm text-center text-white font-bold">
-            {transaction.fullname}
           </p>
         </div>
       </div>

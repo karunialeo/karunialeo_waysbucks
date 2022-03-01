@@ -1,13 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import formatThousands from "format-thousands";
 import { Link, useNavigate } from "react-router-dom";
-import urlSlug from "url-slug";
 import { globalTitle } from "../components/App";
 import { API } from "../config/api";
 
 import { UserContext } from "../contexts/UserContext";
 import { CartModalContext } from "../contexts/ModalContext";
-import { OrderContext, ProcessOrderContext } from "../contexts/OrderContext";
+import { OrderContext } from "../contexts/OrderContext";
 
 import { uploads } from "../exports";
 import { CartModal } from "../exports";
@@ -29,7 +28,7 @@ function MyCart() {
     attachment: "",
   });
 
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
 
   const { fullname, email, phone, address, totalPrice, attachment } = form;
 
@@ -76,7 +75,7 @@ function MyCart() {
       setOpen(!open);
       setTimeout(() => {
         setOpen(false);
-        // navigate(`/profile/${urlSlug(state.user.fullname)}`);
+        navigate(`/`);
       }, 5000);
     } catch (error) {
       console.log(error);
@@ -111,9 +110,14 @@ function MyCart() {
       <h4 className="font-['Avenir-Black'] font-bold text-3xl mb-8">My Cart</h4>
       {order.length > 0 ? (
         <>
-          <p className="mb-5">Review Your Order</p>
           <div className="lg:flex justify-between">
             <div className="w-full lg:w-7/12 mb-20 lg:mb-0">
+              <div className="mb-4 flex justify-between">
+                <p>Review Your Order</p>
+                <Link to="/" className="hover:underline mb-3">
+                  Continue Shopping
+                </Link>
+              </div>
               <hr className="border-1 border-brand-red" />
               {order.map((item) => (
                 <div key={item.id} className="flex justify-between">

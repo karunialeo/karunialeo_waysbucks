@@ -78,11 +78,6 @@ function Navbar() {
                     alt="user"
                     className="max-h-14 w-14 object-cover rounded-full border-2 border-brand-red"
                   />
-                  {transaction ? (
-                    <div className="w-5 h-5 text-xs text-white font-bold bg-red-600 rounded-full absolute -right-2 -top-1 flex justify-center items-center">
-                      !
-                    </div>
-                  ) : null}
                 </Menu.Button>
               </div>
               <Transition

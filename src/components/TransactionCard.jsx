@@ -116,6 +116,9 @@ export default function TransactionCard() {
             )}
             ,-
           </p>
+          <p className="text-sm text-center text-white font-bold">
+            {transaction.fullname}
+          </p>
         </div>
       </div>
       <TransactionModal

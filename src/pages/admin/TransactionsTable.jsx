@@ -113,23 +113,11 @@ export default function TransactionsTable() {
         </>
       );
     } else if (status == "Success") {
-      return (
-        <>
-          <img src={ConfirmIcon} alt="" />
-        </>
-      );
+      return <img src={ConfirmIcon} alt="" />;
     } else if (status == "Cancel") {
-      return (
-        <>
-          <img src={CancelIcon} alt="" />
-        </>
-      );
+      return <img src={CancelIcon} alt="" />;
     } else if (status == "On The Way") {
-      return (
-        <>
-          <img src={ConfirmIcon} alt="" />
-        </>
-      );
+      return <img src={ConfirmIcon} alt="" />;
     }
   }
 
@@ -218,9 +206,9 @@ export default function TransactionsTable() {
                     <a href={"tel:" + transaction.phone}>{transaction.phone}</a>
                   </td>
                   <td className="px-4 py-2 whitespace-nowrap">
-                    <button onClick={() => setOpen(!open)}>
-                      Rp {formatThousands(transaction.totalPrice, ".")},-
-                    </button>
+                    {/* <button onClick={() => setOpen(!open)}>
+                    </button> */}
+                    Rp {formatThousands(transaction.totalPrice, ".")},-
                   </td>
                   <td
                     className={
@@ -230,7 +218,7 @@ export default function TransactionsTable() {
                   >
                     {transaction.status}
                   </td>
-                  <td className="px-4 py-2 whitespace-nowrap space-x-2 flex justify-center">
+                  <td className="px-4 py-2 whitespace-nowrap space-x-2 flex justify-center items-center">
                     {checkAction(transaction.status, transaction.id)}
                   </td>
                 </tr>

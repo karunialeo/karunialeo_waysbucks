@@ -154,7 +154,7 @@ export default function ProductDesc({ item }) {
                   onChange={handleChange}
                 >
                   <input
-                    className="sr-only"
+                    className="absolute right-5 top-0"
                     type="radio"
                     name="topping"
                     id={item.id}

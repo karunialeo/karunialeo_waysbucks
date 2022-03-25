@@ -1,7 +1,6 @@
 import { Fragment, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
-import { useNavigate } from "react-router-dom";
 import urlSlug from "url-slug";
 
 import {

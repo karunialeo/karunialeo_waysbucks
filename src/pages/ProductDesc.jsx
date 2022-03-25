@@ -21,8 +21,6 @@ export default function ProductDesc({ item }) {
   const [checked, setChecked] = useState(false);
   const [value, setValue] = useState(1);
 
-  let toppingCheck = Array.from(document.getElementsByName("topping"));
-
   const handleChange = (event) => {
     setValue(event.target.value);
   };

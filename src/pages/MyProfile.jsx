@@ -55,7 +55,7 @@ export default function MyProfile() {
           >
             <input type="file" className="sr-only" />
             <img
-              src={uploads + state.user.profile.image}
+              src={uploads + "waysbucks_media/" + state.user.profile.image}
               alt=""
               className="hover:brightness-75"
             />

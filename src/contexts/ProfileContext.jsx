@@ -15,6 +15,7 @@ export const ProfileProvider = ({ children }) => {
     try {
       const response = await API.get("/user/" + state.user.id);
       setUser(response.data.data.user);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }

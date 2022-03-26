@@ -12,7 +12,8 @@ import Modal from "../components/modal";
 
 import CheckList from "../components/CheckList";
 
-export const uploads = "http://localhost:5000/uploads/";
+export const uploads =
+  "https://res.cloudinary.com/karunialeo/image/upload/v1648225789/waysbucks_media/";
 
 export {
   Navbar,

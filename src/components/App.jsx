@@ -17,7 +17,7 @@ import {
 } from "../contexts/ModalContext";
 import { UserContext } from "../contexts/UserContext";
 
-import { Modal, Navbar } from "../exports/";
+import { Modal, Navbar, Footer } from "../exports/";
 import {
   LandingPage,
   ProductDesc,
@@ -145,6 +145,7 @@ export default function App() {
           <Route path="/add-topping" element={<AddTopping />} />
         </Route>
       </Routes>
+      <Footer />
     </>
   );
 }

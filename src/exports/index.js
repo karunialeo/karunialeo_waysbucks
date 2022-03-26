@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import Jumbotron from "../components/Jumbotron";
 import Menu from "../components/Menu";
 
@@ -17,6 +18,7 @@ export const uploads =
 
 export {
   Navbar,
+  Footer,
   Jumbotron,
   Menu,
   ProductCard,

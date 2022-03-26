@@ -61,11 +61,11 @@ function Navbar() {
             {admin ? null : (
               <Link to="/my-cart" className="relative">
                 <img src={BasketIcon} alt="shopping-basket" />
-                {order.length > 0 ? (
+                {/* {order.length > 0 ? (
                   <div className="w-5 h-5 text-xs text-white font-bold bg-red-600 rounded-full absolute -right-2 -top-1 flex justify-center items-center">
                     {order.length}
                   </div>
-                ) : null}
+                ) : null} */}
               </Link>
             )}
             <Menu as="div" className="relative z-10">

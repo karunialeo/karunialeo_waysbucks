@@ -60,6 +60,7 @@ export default function ProductDesc({ item }) {
     try {
       const response = await API.get("/topping/" + value);
       setTopping(response.data.data.topping);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }

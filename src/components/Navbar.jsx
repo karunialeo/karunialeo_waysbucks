@@ -73,7 +73,13 @@ function Navbar() {
                 <Menu.Button>
                   <span className="sr-only">Open user menu</span>
                   <img
-                    src={admin ? LogoBlack : uploads + state.user.profile.image}
+                    src={
+                      admin
+                        ? LogoBlack
+                        : uploads +
+                          "waysbucks_media/" +
+                          state.user.profile.image
+                    }
                     alt="user"
                     className="max-h-14 w-14 object-cover rounded-full border-2 border-brand-red"
                   />

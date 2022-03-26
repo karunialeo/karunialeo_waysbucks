@@ -13,7 +13,7 @@ import Modal from "../components/modal";
 import CheckList from "../components/CheckList";
 
 export const uploads =
-  "https://res.cloudinary.com/karunialeo/image/upload/v1648225789/waysbucks_media/";
+  "https://res.cloudinary.com/karunialeo/image/upload/v1648225789/";
 
 export {
   Navbar,

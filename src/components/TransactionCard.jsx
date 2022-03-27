@@ -115,11 +115,11 @@ export default function TransactionCard() {
       <div className="flex flex-row lg:flex-col justify-between lg:justify-start items-center lg:space-y-4">
         <img src={LogoWhite} alt="" className="" />
         <img src={QRImg} alt="" />
-        <div className="space-y-4">
+        <div className="space-y-4 flex flex-col items-center">
           <p
             className={
               checkStatus(transaction.status) +
-              " text-sm text-center font-bold px-5 py-1 rounded-md"
+              " text-sm text-center font-bold px-10 py-1 rounded-md"
             }
           >
             {transaction.status}

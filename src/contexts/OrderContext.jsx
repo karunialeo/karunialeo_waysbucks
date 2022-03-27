@@ -16,6 +16,7 @@ export const OrderProvider = ({ children }) => {
       const response = await API.get(`/orders/${state.user.id}`);
       // Store order data to useState variabel
       setOrder(response.data.orders);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }

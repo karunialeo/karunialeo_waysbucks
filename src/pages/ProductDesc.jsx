@@ -134,7 +134,7 @@ export default function ProductDesc({ item }) {
         </div>
         <div className="text w-full lg:w-7/12">
           <div className="mb-10">
-            <h1 className="text-brand-red text-5xl font-extrabold font-['Avenir-Black'] mb-4">
+            <h1 className="text-brand-red text-2xl lg:text-4xl font-extrabold font-['Avenir-Black'] mb-4">
               {product.title}
             </h1>
             <p className="text-brand-red text-xl">
